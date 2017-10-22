@@ -1,0 +1,43 @@
+﻿<Window x:Class="Database_Libary.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Database_Libary"
+        mc:Ignorable="d"
+        Title="Main Window"
+        Height="570"
+        Width="565"
+        ResizeMode="NoResize">
+
+    <Grid>
+
+        <Menu x:Name="dropdown" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="45" MinHeight="20" Height="20" Width="45">
+            <MenuItem Header="Menu" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <MenuItem x:Name="addGame" Header="Add Game" HorizontalAlignment="Left" VerticalAlignment="Top" Click="addGame_Click"/>
+                <MenuItem x:Name="removeGame" Header="Remove Game" HorizontalAlignment="Left" VerticalAlignment="Top" Click="removeGame_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <DataGrid
+            x:Name="listOfGames"
+            Width="535"
+            Height="490"
+            Margin="10,35,0,0"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            IsReadOnly="True"
+            />
+
+        <Button
+            x:Name="remove"
+            Content="Remove Game"
+            Width="95"
+            Margin="450,8,0,0"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            Click="remove_Click"
+            />
+
+    </Grid>
+</Window>

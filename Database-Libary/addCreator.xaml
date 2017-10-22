@@ -1,0 +1,101 @@
+﻿<Window x:Class="Database_Libary.addCreator"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Database_Libary"
+        mc:Ignorable="d"
+        Title="Add Developer"
+        Width="483"
+        Height="347"
+        ResizeMode="NoResize">
+
+    <Grid>
+
+        <Menu x:Name="dropdown" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="45" MinHeight="20" Height="20" Width="45">
+            <MenuItem Header="Menu" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <MenuItem x:Name="addGame" Header="Add creator to the list" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </MenuItem>
+        </Menu>
+
+        <ListBox
+            x:Name="listboxLeft"
+            Width="165"
+            Height="230"
+            Margin="10,40,0,0"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            />
+
+        <ListBox
+            x:Name="listboxRight"           
+            Width="165"
+            Height="230"
+            Margin="0,40,10,0"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Right"
+            />
+
+        <Button
+            x:Name="moveToRight"
+            Content="-->"
+            Height="18"
+            Width="50"
+            Margin="210,75,0,0"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            HorizontalAlignment="Left"
+            HorizontalContentAlignment="Center"
+            Click="moveToRight_Click"
+            />
+
+        <Button
+            x:Name="moveAllToRight"
+            Content=">>"
+            Height="18"
+            Width="50"
+            Margin="210,115,0,0"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            HorizontalAlignment="Left"
+            HorizontalContentAlignment="Center"
+            Click="moveAllToRight_Click"
+            />
+
+        <Button
+            x:Name="moveAllToLeft"
+            Content="&lt;&lt;"
+            Height="18"
+            Width="50"
+            Margin="210,155,0,0"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            HorizontalAlignment="Left"
+            HorizontalContentAlignment="Center"
+            Click="moveAllToLeft_Click"
+            />
+
+        <Button
+            x:Name="moveToLeft"
+            Content="&lt;--"
+            Height="18"
+            Width="50"
+            Margin="210,195,0,0"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            HorizontalAlignment="Left"
+            HorizontalContentAlignment="Center"
+            Click="moveToLeft_Click"
+            />
+
+        <Button
+            x:Name="save"
+            Content="Save"
+            Width="50"
+            Margin="0,280,60,0"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Right"
+            />
+
+    </Grid>
+</Window>

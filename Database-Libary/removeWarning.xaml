@@ -1,0 +1,70 @@
+﻿<Window x:Class="Database_Libary.removeWarning"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Database_Libary"
+        mc:Ignorable="d"
+        Title="Warning"
+        Width="310"
+        Height="186.4"
+        ResizeMode="NoResize">
+
+    <Grid>
+
+        <Label
+            Content="Are you sure you want to remove"
+            Margin="10,10,0,0"
+            Width="230"
+            Height="35"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"            
+            />
+
+        <Label
+            x:Name="name"
+            Content="Name of game"
+            Width="275"
+            Height="30"
+            Margin="10,40,0,0"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            />
+
+        <Button
+		    x:Name="removeGame"
+		    Content="Remove game"
+            Width="104"
+		    Height="30"
+		    Margin="10,0,0,20"
+		    VerticalAlignment="Bottom"
+		    VerticalContentAlignment="Center"
+            HorizontalAlignment="Left"
+		    HorizontalContentAlignment="Center"
+		    Padding="2" Click="removeGame_Click"
+		    />
+
+        <Button
+		    x:Name="cancel"
+		    Content="Cancel"
+            Width="104"
+		    Height="30"
+		    Margin="180,0,0,20"
+		    VerticalAlignment="Bottom"
+		    VerticalContentAlignment="Center"
+            HorizontalAlignment="Left"
+		    HorizontalContentAlignment="Center"
+		    Padding="2" Click="cancel_Click"
+		    />
+        
+        <Label
+            Content="From the list??"
+            Margin="10,70,0,0"
+            Width="230"
+            Height="35"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"            
+            />
+
+    </Grid>
+</Window>
