@@ -41,7 +41,8 @@
 		    VerticalContentAlignment="Center"
             HorizontalAlignment="Left"
 		    HorizontalContentAlignment="Center"
-		    Padding="2" Click="removeGame_Click"
+		    Padding="2"
+            Click="removeGame_Click"
 		    />
 
         <Button
@@ -54,7 +55,8 @@
 		    VerticalContentAlignment="Center"
             HorizontalAlignment="Left"
 		    HorizontalContentAlignment="Center"
-		    Padding="2" Click="cancel_Click"
+		    Padding="2"
+            Click="cancel_Click"
 		    />
         
         <Label

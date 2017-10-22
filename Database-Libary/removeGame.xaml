@@ -41,7 +41,8 @@
             Width="130"
             Margin="225,12,0,0"
             VerticalAlignment="Top"
-            HorizontalAlignment="Left" Click="RemoveGame_Click"
+            HorizontalAlignment="Left"
+            Click="RemoveGame_Click"
             />
 
     </Grid>

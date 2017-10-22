@@ -92,9 +92,11 @@ namespace Database_Libary
         
         public void updateList()
         {
+            /*
             listOfGames.ItemsSource = null;
             listOfGames.Items.Clear();
             showGames();
+            */
         }
     }
 }
