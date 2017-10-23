@@ -46,7 +46,12 @@ namespace Database_Libary
             specialEdition.IsChecked = false;
             
             genreListbox.Items.Add("            Genres");
-            genreListbox.Items.Add("------------------------"); //42
+            genreListbox.Items.Add("------------------------");
+
+            nameOfGame.Text = "Test";
+            genreListbox.Items.Add("Test1");
+            genreListbox.Items.Add("Test2");
+            specialEdition.IsChecked = true;
 
             nameOfGame.Focus();
 
@@ -79,13 +84,17 @@ namespace Database_Libary
                 
                 genres = genres.Remove(genres.Length - 3);
                 
-                /*
-                if (mysql.addGame(nameOfGame.Text, creators, genres, specialEdition_string))
-                {
-                    if (updateListAdd != null) updateListAdd();
-                    this.Close();
-                }
-                */
+                MessageBox.Show("Name: " + nameOfGame.Text + "\n" +
+                                "Publisher: " + publisher.Text + "\n" +
+                                "Developers: " +  addCreator.developer.ToString() /*mysql.addDevelopers*/ + "\n" +
+                                "Genres: " + genres + "\n" + 
+                                "Special Edition: " + specialEdition_string);
+                
+                //if (mysql.addGame(nameOfGame.Text, creators, genres, specialEdition_string))
+                //{
+                //    if (updateListAdd != null) updateListAdd();
+                //    this.Close();
+                //}
             }
             else if (nameOfGame.Text == "" || genreListbox.Items.Count == 0)
             {
@@ -188,7 +197,7 @@ namespace Database_Libary
             int id = int.Parse(index);
 
             addCreator Add = new addCreator(id);
-            
+
             Add.Owner = this;
             Add.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             Add.Show();

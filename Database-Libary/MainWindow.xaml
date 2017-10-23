@@ -10,12 +10,11 @@
         Width="565"
         ResizeMode="NoResize">
 
-    <Grid>
+    <Grid Margin="0,2,0.4,-2">
 
         <Menu x:Name="dropdown" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="45" MinHeight="20" Height="20" Width="45">
             <MenuItem Header="Menu" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <MenuItem x:Name="addGame" Header="Add Game" HorizontalAlignment="Left" VerticalAlignment="Top" Click="addGame_Click"/>
-                <MenuItem x:Name="removeGame" Header="Remove Game" HorizontalAlignment="Left" VerticalAlignment="Top" Click="removeGame_Click"/>
             </MenuItem>
         </Menu>
 

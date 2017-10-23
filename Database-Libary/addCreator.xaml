@@ -14,7 +14,7 @@
 
         <Menu x:Name="dropdown" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="45" MinHeight="20" Height="20" Width="45">
             <MenuItem Header="Menu" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <MenuItem x:Name="addGame" Header="Add creator to the list" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <MenuItem x:Name="addDeveloper" Header="Add developer to the list" HorizontalAlignment="Left" VerticalAlignment="Top" Click="addDeveloper_Click"/>
             </MenuItem>
         </Menu>
 
@@ -95,6 +95,7 @@
             Margin="0,280,60,0"
             VerticalAlignment="Top"
             HorizontalAlignment="Right"
+            Click="save_Click"
             />
 
     </Grid>
