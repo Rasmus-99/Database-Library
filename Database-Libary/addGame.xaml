@@ -22,7 +22,7 @@
             HorizontalAlignment="Left"
             Padding="2"
             />
-        
+
         <TextBox
             x:Name="nameOfGame"
             Text="Name of game"
@@ -34,28 +34,18 @@
             HorizontalAlignment="Left"
             Padding="2"
             />
- 
+
         <ComboBox
             x:Name="publisher"
             Width="160"
             Margin="10,58,0,0"
             VerticalAlignment="Top"
-            HorizontalAlignment="Left"
-            
-            />
-
-        <Button
-            x:Name="addPublisher"
-            Content="Add Publisher"
-            Width="100"
-            Margin="10,90,0,0"
-            VerticalAlignment="Top"
-            HorizontalAlignment="Left"
+            HorizontalAlignment="Left"            
             />
 
         <Label
             Content="Genre(s)"
-            Margin="5,150,0,0"
+            Margin="5,120,0,0"
             Width="100"
             Height="35"
             VerticalAlignment="Top"
@@ -67,7 +57,7 @@
         <TextBox
             x:Name="genre"
             Text="Genre(s)"
-            Margin="100,150,0,0"
+            Margin="100,120,0,0"
             Width="100"
             Height="35"
             VerticalAlignment="Top"
@@ -81,7 +71,7 @@
             x:Name="addGenre"
             Content="Add Genre"
             Width="100"
-            Margin="100,195,0,0"
+            Margin="100,165,0,0"
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
             Click="addGenre_Click"
@@ -89,7 +79,7 @@
 
         <Label
             Content="special Edition:"
-            Margin="5,234,0,0"
+            Margin="5,204,0,0"
             Width="100"
             Height="35"
             VerticalAlignment="Top"
@@ -102,7 +92,7 @@
             x:Name="specialEdition"
             Width="15"
             Height="15"
-            Margin="145,245,0,0"
+            Margin="145,215,0,0"
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
             />
@@ -140,7 +130,7 @@
             x:Name="clear"
             Content="Clear"
             Width="130"
-            Margin="70,275,0,0"
+            Margin="10,275,0,0"
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
             Click="clear_Click"

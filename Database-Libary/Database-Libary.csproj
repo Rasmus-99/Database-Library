@@ -60,6 +60,9 @@
     <Compile Include="addCreator.xaml.cs">
       <DependentUpon>addCreator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="addDeveloper.xaml.cs">
+      <DependentUpon>addDeveloper.xaml</DependentUpon>
+    </Compile>
     <Compile Include="removeGame.xaml.cs">
       <DependentUpon>removeGame.xaml</DependentUpon>
     </Compile>
@@ -67,6 +70,10 @@
       <DependentUpon>removeWarning.xaml</DependentUpon>
     </Compile>
     <Page Include="addCreator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="addDeveloper.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -20,6 +20,8 @@ namespace Database_Libary
 
         bool result = false;
 
+        public static string test = "This is a test";
+
         public string textToBring { get; set; }
 
         public bool addGame(string name, string creator, string genre, string special)

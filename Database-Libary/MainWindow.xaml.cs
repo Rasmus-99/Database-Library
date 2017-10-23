@@ -38,11 +38,16 @@ namespace Database_Libary
 
             //Sorts the DataGrid
             listOfGames.Items.SortDescriptions.Add(new SortDescription("NameOfGame", ListSortDirection.Ascending));
+
+            addGame Add = new addGame();
+            Add.Show();
+            this.Close();
         }
 
         public void showGames()
         {
-            sql = "SELECT * FROM games";
+            sql = "SELECT * FROM game";
+            //sql = "SELECT b.Title, a.Game_Title, b.Publishers, c.Developer FROM games AS a INNER JOIN games AS b ON a.ID = b.ID";
 
             adapter = new MySqlDataAdapter(sql, con);
             
@@ -63,18 +68,18 @@ namespace Database_Libary
             Add.Show();
         }
 
+        /*
         private void removeGame_Click(object sender, RoutedEventArgs e)
         {
-            /*
-            removeGame Remove = new removeGame();
+            //removeGame Remove = new removeGame();
 
-            Remove.updateListRemove += updateList;
+            //Remove.updateListRemove += updateList;
 
-            Remove.Owner = this;
-            Remove.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            Remove.Show();
-            */
+            //Remove.Owner = this;
+            //Remove.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            //Remove.Show();
         }
+        */
 
         private void remove_Click(object sender, RoutedEventArgs e)
         {

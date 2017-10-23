@@ -22,11 +22,14 @@ namespace Database_Libary
     /// </summary>
     public partial class addCreator : Window
     {
+        MySQL mysql = new MySQL();
+
         MySqlConnection con = new MySqlConnection("host=localhost;user=root;database=library;");
         MySqlCommand cmd;
         MySqlDataReader reader;
 
         string sql;
+        public static string developer = "";
 
         public addCreator(int id)
         {
@@ -91,6 +94,47 @@ namespace Database_Libary
             {
                 MessageBox.Show(exc.Message);
             }
+        }
+
+        private void save_Click(object sender, RoutedEventArgs e)
+        {
+            test();
+
+            /*
+            developer = "";
+
+            for (int i = 0; i < dropdown.Items.Count; i++)
+            {
+                developer += dropdown.Items[i].ToString() + " - ";
+            }
+
+            developer = developer.Remove(developer.Length - 3);
+
+            this.Close();
+            */
+        }
+
+        void test()
+        {
+            developer = "";
+
+            for (int i = 0; i < dropdown.Items.Count; i++)
+            {
+                developer += dropdown.Items[i].ToString() + " - ";
+            }
+
+            developer = developer.Remove(developer.Length - 3);
+
+            MessageBox.Show(developer);
+        }
+
+        private void addDeveloper_Click(object sender, RoutedEventArgs e)
+        {
+            addDeveloper add = new addDeveloper();
+
+            add.Owner = this;
+            add.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            add.ShowDialog();
         }
     }
 }
