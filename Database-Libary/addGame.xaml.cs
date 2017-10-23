@@ -21,7 +21,6 @@ namespace Database_Libary
     /// </summary>
     public partial class addGame : Window
     {
-        MySqlConnection con = new MySqlConnection("host=localhost;user=root;database=library;");
         MySqlCommand cmd;
         MySqlDataReader reader;
 
@@ -160,13 +159,13 @@ namespace Database_Libary
             c.SelectedIndex = 0;
             c.Items.Add("Select a publisher");
 
-            con.Close();
+            MySQL.con.Close();
 
             try
             {
-                con.Open();
+                MySQL.con.Open();
 
-                cmd = new MySqlCommand(querry, con);
+                cmd = new MySqlCommand(querry, MySQL.con);
                 reader = cmd.ExecuteReader();
 
                 while (reader.Read())
@@ -175,15 +174,15 @@ namespace Database_Libary
                     c.Items.Add(name);
                 }
 
-                con.Close();
+                MySQL.con.Close();
             }
             catch (Exception exc)
             {
                 MessageBox.Show(exc.Message);
 
-                if (con.State == ConnectionState.Open)
+                if (MySQL.con.State == ConnectionState.Open)
                 {
-                    con.Close();
+                    MySQL.con.Close();
                 }
             }
 

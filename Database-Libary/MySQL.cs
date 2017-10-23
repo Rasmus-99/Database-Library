@@ -11,7 +11,7 @@ namespace Database_Libary
 {
     public class MySQL
     {
-        MySqlConnection con = new MySqlConnection("host=localhost;user=root;database=library;");
+        public static MySqlConnection con = new MySqlConnection("host=localhost;user=root;database=library_test;");
         MySqlCommand check;
         MySqlCommand cmd;
         MySqlDataReader rdr;

@@ -23,8 +23,7 @@ namespace Database_Libary
     public partial class addCreator : Window
     {
         MySQL mysql = new MySQL();
-
-        MySqlConnection con = new MySqlConnection("host=localhost;user=root;database=library;");
+        
         MySqlCommand cmd;
         MySqlDataReader reader;
 
@@ -66,8 +65,8 @@ namespace Database_Libary
         void fillList(int id)
         {
             sql = "SELECT Developer FROM developers WHERE Publisher_ID = '" + id + "'";
-            cmd = new MySqlCommand(sql, con);
-            con.Open();
+            cmd = new MySqlCommand(sql, MySQL.con);
+            MySQL.con.Open();
             reader = cmd.ExecuteReader();
 
             while (reader.Read())
@@ -75,6 +74,8 @@ namespace Database_Libary
                 string names = reader.GetString(0);
                 listboxLeft.Items.Add(names);
             }
+
+            MySQL.con.Close();
         }
 
         void moveItems(ListBox lstFrom, ListBox lstTo)
@@ -130,11 +131,11 @@ namespace Database_Libary
 
         private void addDeveloper_Click(object sender, RoutedEventArgs e)
         {
-            addDeveloper add = new addDeveloper();
+            addDeveloper Add = new addDeveloper();
 
-            add.Owner = this;
-            add.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            add.ShowDialog();
+            Add.Owner = this;
+            Add.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            Add.ShowDialog();
         }
     }
 }

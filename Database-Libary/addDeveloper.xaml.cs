@@ -21,7 +21,6 @@ namespace Database_Libary
     /// </summary>
     public partial class addDeveloper : Window
     {
-        MySqlConnection con = new MySqlConnection("host=localhost;user=root;database=library;");
         MySqlCommand cmd;
         MySqlCommand check;
         MySqlDataReader rdr;
@@ -41,26 +40,26 @@ namespace Database_Libary
             try
             {
                 sql = "SELECT * FROM developers WHERE Developer = '" + textAdd.Text + "'";
-                check = new MySqlCommand(sql, con);
-                con.Open();
+                check = new MySqlCommand(sql, MySQL.con);
+                MySQL.con.Open();
                 rdr = check.ExecuteReader();
 
                 if (!rdr.Read())
                 {
-                    con.Close();
+                    MySQL.con.Close();
 
                     sql = "INSERT INTO developers (Publisher_ID, Developer) VALUES('" + dropdown.SelectedIndex + "','" + textAdd.Text + "')";
-                    cmd = new MySqlCommand(sql, con);
+                    cmd = new MySqlCommand(sql, MySQL.con);
 
-                    con.Open();
+                    MySQL.con.Open();
                     cmd.ExecuteNonQuery();
-                    con.Close();
+                    MySQL.con.Close();
 
                     MessageBox.Show("Successfully added " + textAdd.Text + " to the list!");
                 }
                 else
                 {
-                    con.Close();
+                    MySQL.con.Close();
                     MessageBox.Show("Developer already exists");
                 }
             }
@@ -68,9 +67,9 @@ namespace Database_Libary
             {
                 MessageBox.Show(exc.Message);
 
-                if (con.State == ConnectionState.Open)
+                if (MySQL.con.State == ConnectionState.Open)
                 {
-                    con.Close();
+                    MySQL.con.Close();
                 }
             }
         }
@@ -81,13 +80,13 @@ namespace Database_Libary
             c.SelectedIndex = 0;
             c.Items.Add("Select a publisher");
 
-            con.Close();
+            MySQL.con.Close();
 
             try
             {
-                con.Open();
+                MySQL.con.Open();
 
-                cmd = new MySqlCommand(querry, con);
+                cmd = new MySqlCommand(querry, MySQL.con);
                 rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())
@@ -96,15 +95,15 @@ namespace Database_Libary
                     c.Items.Add(name);
                 }
 
-                con.Close();
+                MySQL.con.Close();
             }
             catch (Exception exc)
             {
                 MessageBox.Show(exc.Message);
 
-                if (con.State == ConnectionState.Open)
+                if (MySQL.con.State == ConnectionState.Open)
                 {
-                    con.Close();
+                    MySQL.con.Close();
                 }
             }
         }

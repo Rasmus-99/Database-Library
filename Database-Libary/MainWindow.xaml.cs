@@ -23,7 +23,6 @@ namespace Database_Libary
     /// </summary>
     public partial class MainWindow : Window
     {
-        MySqlConnection con = new MySqlConnection("host=localhost;user=root;database=library;");
         MySqlDataAdapter adapter;
 
         MySQL mysql = new MySQL();
@@ -49,7 +48,7 @@ namespace Database_Libary
             sql = "SELECT * FROM game";
             //sql = "SELECT b.Title, a.Game_Title, b.Publishers, c.Developer FROM games AS a INNER JOIN games AS b ON a.ID = b.ID";
 
-            adapter = new MySqlDataAdapter(sql, con);
+            adapter = new MySqlDataAdapter(sql, MySQL.con);
             
             DataSet ds = new DataSet();
             adapter.Fill(ds);
