@@ -63,6 +63,9 @@
     <Compile Include="addDeveloper.xaml.cs">
       <DependentUpon>addDeveloper.xaml</DependentUpon>
     </Compile>
+    <Compile Include="addTitleAndPublisher.xaml.cs">
+      <DependentUpon>addTitleAndPublisher.xaml</DependentUpon>
+    </Compile>
     <Compile Include="removeGame.xaml.cs">
       <DependentUpon>removeGame.xaml</DependentUpon>
     </Compile>
@@ -78,6 +81,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="addGame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="addTitleAndPublisher.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

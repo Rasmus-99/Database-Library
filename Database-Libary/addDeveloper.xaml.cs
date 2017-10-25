@@ -21,12 +21,6 @@ namespace Database_Libary
     /// </summary>
     public partial class addDeveloper : Window
     {
-        MySqlCommand cmd;
-        MySqlCommand check;
-        MySqlDataReader rdr;
-
-        string sql;
-
         public addDeveloper()
         {
             InitializeComponent();
@@ -39,20 +33,20 @@ namespace Database_Libary
         {
             try
             {
-                sql = "SELECT * FROM developers WHERE Developer = '" + textAdd.Text + "'";
-                check = new MySqlCommand(sql, MySQL.con);
+                MySQL.sql = "SELECT * FROM developers WHERE Developer = '" + textAdd.Text + "'";
+                MySQL.check = new MySqlCommand(MySQL.sql, MySQL.con);
                 MySQL.con.Open();
-                rdr = check.ExecuteReader();
+                MySQL.rdr = MySQL.check.ExecuteReader();
 
-                if (!rdr.Read())
+                if (!MySQL.rdr.Read())
                 {
                     MySQL.con.Close();
 
-                    sql = "INSERT INTO developers (Publisher_ID, Developer) VALUES('" + dropdown.SelectedIndex + "','" + textAdd.Text + "')";
-                    cmd = new MySqlCommand(sql, MySQL.con);
+                    MySQL.sql = "INSERT INTO developers (Publisher_ID, Developer) VALUES('" + dropdown.SelectedIndex + "','" + textAdd.Text + "')";
+                    MySQL.cmd = new MySqlCommand(MySQL.sql, MySQL.con);
 
                     MySQL.con.Open();
-                    cmd.ExecuteNonQuery();
+                    MySQL.cmd.ExecuteNonQuery();
                     MySQL.con.Close();
 
                     MessageBox.Show("Successfully added " + textAdd.Text + " to the list!");
@@ -86,12 +80,12 @@ namespace Database_Libary
             {
                 MySQL.con.Open();
 
-                cmd = new MySqlCommand(querry, MySQL.con);
-                rdr = cmd.ExecuteReader();
+                MySQL.cmd = new MySqlCommand(querry, MySQL.con);
+                MySQL.rdr = MySQL.cmd.ExecuteReader();
 
-                while (rdr.Read())
+                while (MySQL.rdr.Read())
                 {
-                    string name = rdr.GetString(2);
+                    string name = MySQL.rdr.GetString(2);
                     c.Items.Add(name);
                 }
 

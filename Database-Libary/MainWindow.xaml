@@ -10,7 +10,7 @@
         Width="565"
         ResizeMode="NoResize">
 
-    <Grid Margin="0,2,0.4,-2">
+    <Grid>
 
         <Menu x:Name="dropdown" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="45" MinHeight="20" Height="20" Width="45">
             <MenuItem Header="Menu" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -26,7 +26,8 @@
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
             IsReadOnly="True"
-            />
+            MouseDoubleClick="DataGridRow_MouseDoubleClick"
+        />
 
         <Button
             x:Name="remove"

@@ -7,14 +7,36 @@
         mc:Ignorable="d"
         Title="Add game"
         Width="365"
-        Height="345"
+        Height="405"
         ResizeMode="NoResize">
 
     <Grid>
 
+        <Menu x:Name="dropdown" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="45" MinHeight="20" Height="20" Width="45">
+            <MenuItem Header="Menu" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <MenuItem x:Name="addTitle" Header="Add a game title and publisher to the list" HorizontalAlignment="Left" VerticalAlignment="Top" Click="addTitle_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <ComboBox
+            x:Name="title"
+            Width="160"
+            Margin="10,40,0,0"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"            
+            />
+
+        <ComboBox
+            x:Name="publisher"
+            Width="160"
+            Margin="10,80,0,0"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"            
+            />
+
         <Label
-            Content="Name:"
-            Margin="5,5,0,0"
+            Content="Second title:"
+            Margin="10,120,0,0"
             Width="100"
             Height="35"
             VerticalAlignment="Top"
@@ -24,9 +46,9 @@
             />
 
         <TextBox
-            x:Name="nameOfGame"
-            Text="Name of game"
-            Margin="100,5,0,0"
+            x:Name="secondTitle"
+            Text="second Title"
+            Margin="105,120,0,0"
             Width="100"
             Height="35"
             VerticalAlignment="Top"
@@ -35,17 +57,32 @@
             Padding="2"
             />
 
-        <ComboBox
-            x:Name="publisher"
-            Width="160"
-            Margin="10,58,0,0"
+        <Label
+            Content="Number:"
+            Margin="10,165,0,0"
+            Width="100"
+            Height="35"
             VerticalAlignment="Top"
-            HorizontalAlignment="Left"            
+            VerticalContentAlignment="Center"
+            HorizontalAlignment="Left"
+            Padding="2"
+            />
+
+        <TextBox
+            x:Name="number"
+            Text="Number"
+            Margin="105,165,0,0"
+            Width="100"
+            Height="35"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            HorizontalAlignment="Left"
+            Padding="2"
             />
 
         <Label
             Content="Genre(s)"
-            Margin="5,120,0,0"
+            Margin="10,210,0,0"
             Width="100"
             Height="35"
             VerticalAlignment="Top"
@@ -57,7 +94,7 @@
         <TextBox
             x:Name="genre"
             Text="Genre(s)"
-            Margin="100,120,0,0"
+            Margin="105,210,0,0"
             Width="100"
             Height="35"
             VerticalAlignment="Top"
@@ -71,15 +108,15 @@
             x:Name="addGenre"
             Content="Add Genre"
             Width="100"
-            Margin="100,165,0,0"
+            Margin="105,255,0,0"
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
             Click="addGenre_Click"
             />
 
         <Label
-            Content="special Edition:"
-            Margin="5,204,0,0"
+            Content="Collector's Edition:"
+            Margin="10,290,0,0"
             Width="100"
             Height="35"
             VerticalAlignment="Top"
@@ -89,10 +126,10 @@
             />
 
         <CheckBox
-            x:Name="specialEdition"
+            x:Name="CollectorsEdition"
             Width="15"
             Height="15"
-            Margin="145,215,0,0"
+            Margin="150,301,0,0"
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
             />
@@ -101,7 +138,7 @@
             x:Name="genreListbox"
             Width="130"
             Height="230"
-            Margin="210,5,0,0"
+            Margin="215,20,0,0"
             VerticalAlignment="Top"
             HorizontalAlignment="Left"            
             />
@@ -110,7 +147,7 @@
             x:Name="removeGenre"
             Content="Remove Last added"
             Width="130"
-            Margin="210,240,0,0"
+            Margin="215,255,0,0"
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
             Click="removeGenre_Click"
@@ -120,7 +157,7 @@
             x:Name="AddGame"
             Content="Add Game"
             Width="130"
-            Margin="210,275,0,0"
+            Margin="215,335,0,0"
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
             Click="AddGame_Click"
@@ -130,7 +167,7 @@
             x:Name="clear"
             Content="Clear"
             Width="130"
-            Margin="10,275,0,0"
+            Margin="15,335,0,0"
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
             Click="clear_Click"

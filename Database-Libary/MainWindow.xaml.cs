@@ -23,11 +23,7 @@ namespace Database_Libary
     /// </summary>
     public partial class MainWindow : Window
     {
-        MySqlDataAdapter adapter;
-
         MySQL mysql = new MySQL();
-
-        string sql;
         
         public MainWindow()
         {
@@ -36,22 +32,17 @@ namespace Database_Libary
             showGames();
 
             //Sorts the DataGrid
-            listOfGames.Items.SortDescriptions.Add(new SortDescription("NameOfGame", ListSortDirection.Ascending));
-
-            addGame Add = new addGame();
-            Add.Show();
-            this.Close();
+            listOfGames.Items.SortDescriptions.Add(new SortDescription("Title", ListSortDirection.Ascending));
         }
 
         public void showGames()
         {
-            sql = "SELECT * FROM game";
-            //sql = "SELECT b.Title, a.Game_Title, b.Publishers, c.Developer FROM games AS a INNER JOIN games AS b ON a.ID = b.ID";
+            MySQL.sql = "SELECT p.Title, g.Number, g.SecondTitle, g.CollectorsEdition, g.Genre, p.Publishers, g.Developers FROM games AS g INNER JOIN publishers AS p ON g.Title_ID = p.ID";
 
-            adapter = new MySqlDataAdapter(sql, MySQL.con);
-            
+            MySQL.adapter = new MySqlDataAdapter(MySQL.sql, MySQL.con);
+
             DataSet ds = new DataSet();
-            adapter.Fill(ds);
+            MySQL.adapter.Fill(ds);
 
             listOfGames.ItemsSource = ds.Tables[0].DefaultView;
         }
@@ -67,23 +58,10 @@ namespace Database_Libary
             Add.Show();
         }
 
-        /*
-        private void removeGame_Click(object sender, RoutedEventArgs e)
-        {
-            //removeGame Remove = new removeGame();
-
-            //Remove.updateListRemove += updateList;
-
-            //Remove.Owner = this;
-            //Remove.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            //Remove.Show();
-        }
-        */
-
         private void remove_Click(object sender, RoutedEventArgs e)
         {
             DataRowView dataRow = (DataRowView)listOfGames.SelectedItems[0];
-            string selectedRow = dataRow["NameOfGame"].ToString();
+            string selectedRow = dataRow["SecondTitle"].ToString();
 
             removeWarning RemoveWarning = new removeWarning(selectedRow);
 
@@ -96,11 +74,14 @@ namespace Database_Libary
         
         public void updateList()
         {
-            /*
             listOfGames.ItemsSource = null;
             listOfGames.Items.Clear();
             showGames();
-            */
+        }
+
+        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("This is a test");
         }
     }
 }

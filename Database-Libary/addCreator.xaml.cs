@@ -24,10 +24,6 @@ namespace Database_Libary
     {
         MySQL mysql = new MySQL();
         
-        MySqlCommand cmd;
-        MySqlDataReader reader;
-
-        string sql;
         public static string developer = "";
 
         public addCreator(int id)
@@ -64,14 +60,14 @@ namespace Database_Libary
 
         void fillList(int id)
         {
-            sql = "SELECT Developer FROM developers WHERE Publisher_ID = '" + id + "'";
-            cmd = new MySqlCommand(sql, MySQL.con);
+            MySQL.sql = "SELECT Developer FROM developers WHERE Publisher_ID = '" + id + "'";
+            MySQL.cmd = new MySqlCommand(MySQL.sql, MySQL.con);
             MySQL.con.Open();
-            reader = cmd.ExecuteReader();
+            MySQL.rdr = MySQL.cmd.ExecuteReader();
 
-            while (reader.Read())
+            while (MySQL.rdr.Read())
             {
-                string names = reader.GetString(0);
+                string names = MySQL.rdr.GetString(0);
                 listboxLeft.Items.Add(names);
             }
 
@@ -89,7 +85,7 @@ namespace Database_Libary
                     lstFrom.Items.Remove(item);
                 }
 
-                lstTo.Items.SortDescriptions.Add(new System.ComponentModel.SortDescription("", ListSortDirection.Ascending));
+                lstTo.Items.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
             }
             catch (Exception exc)
             {
@@ -99,34 +95,16 @@ namespace Database_Libary
 
         private void save_Click(object sender, RoutedEventArgs e)
         {
-            test();
-
-            /*
             developer = "";
 
-            for (int i = 0; i < dropdown.Items.Count; i++)
+            for (int i = 0; i < listboxRight.Items.Count; i++)
             {
-                developer += dropdown.Items[i].ToString() + " - ";
+                developer += listboxRight.Items[i].ToString() + " - ";
             }
 
             developer = developer.Remove(developer.Length - 3);
 
             this.Close();
-            */
-        }
-
-        void test()
-        {
-            developer = "";
-
-            for (int i = 0; i < dropdown.Items.Count; i++)
-            {
-                developer += dropdown.Items[i].ToString() + " - ";
-            }
-
-            developer = developer.Remove(developer.Length - 3);
-
-            MessageBox.Show(developer);
         }
 
         private void addDeveloper_Click(object sender, RoutedEventArgs e)

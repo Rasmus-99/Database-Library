@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Database_Libary"
         mc:Ignorable="d"
-        Title="Add Developer"
+        Title="Add Developer To Game"
         Width="483"
         Height="347"
         ResizeMode="NoResize">

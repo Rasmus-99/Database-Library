@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.ComponentModel;
 using System.Data;
 using MySql.Data.MySqlClient;
 
@@ -21,17 +22,13 @@ namespace Database_Libary
     /// </summary>
     public partial class addGame : Window
     {
-        MySqlCommand cmd;
-        MySqlDataReader reader;
+        MySQL mysql = new MySQL();
 
         public event Action updateListAdd;
-
-        MySQL mysql = new MySQL();
         
         string genres = "";
-        string specialEdition_string;
+        string CollectorsEdition_string;
 
-        string[] removeLastCreator = new string[50];
         string[] removeLastGenre = new string[50];
         
         int i = 0;
@@ -40,34 +37,26 @@ namespace Database_Libary
         {
             InitializeComponent();
 
-            nameOfGame.Text = "";
-            genre.Text = "";
-            specialEdition.IsChecked = false;
+            Clear();
             
             genreListbox.Items.Add("            Genres");
             genreListbox.Items.Add("------------------------");
 
-            nameOfGame.Text = "Test";
-            genreListbox.Items.Add("Test1");
-            genreListbox.Items.Add("Test2");
-            specialEdition.IsChecked = true;
-
-            nameOfGame.Focus();
-
-            fillCombo("SELECT * FROM publishers", publisher);
+            fillCombo("SELECT * FROM publishers", title, 1);
+            fillCombo("SELECT * FROM publishers", publisher, 2);
         }
 
         private void AddGame_Click(object sender, RoutedEventArgs e)
         {
-            if (nameOfGame.Text != "" && (genre.Text != "" || genreListbox.Items.Count > 0))
+            if (title.Text != "Select a title" && publisher.Text != "Select a publisher" && (genre.Text != "" || genreListbox.Items.Count > 0))
             {
-                if (specialEdition.IsChecked == true)
+                if (CollectorsEdition.IsChecked == true)
                 {
-                    specialEdition_string = "Yes";
+                    CollectorsEdition_string = "Yes";
                 }
                 else
                 {
-                    specialEdition_string = "No";
+                    CollectorsEdition_string = "No";
                 }
 
                 if (genre.Text != "")
@@ -76,26 +65,24 @@ namespace Database_Libary
                     genre.Text = "";
                 }
 
+                genres = "";
+
                 for (int i = 2; i < genreListbox.Items.Count; i++)
                 {
                     genres += genreListbox.Items[i].ToString() + " - ";
                 }
                 
                 genres = genres.Remove(genres.Length - 3);
-                
-                MessageBox.Show("Name: " + nameOfGame.Text + "\n" +
-                                "Publisher: " + publisher.Text + "\n" +
-                                "Developers: " +  addCreator.developer.ToString() /*mysql.addDevelopers*/ + "\n" +
-                                "Genres: " + genres + "\n" + 
-                                "Special Edition: " + specialEdition_string);
-                
-                //if (mysql.addGame(nameOfGame.Text, creators, genres, specialEdition_string))
-                //{
-                //    if (updateListAdd != null) updateListAdd();
-                //    this.Close();
-                //}
+
+                MySQL.nameOfGame = title.Text;
+
+                if (mysql.insertgames(title.SelectedIndex, number.Text, secondTitle.Text, CollectorsEdition_string, genres, publisher.SelectedIndex, addCreator.developer))
+                {
+                    if (updateListAdd != null) updateListAdd();
+                    this.Close();
+                }
             }
-            else if (nameOfGame.Text == "" || genreListbox.Items.Count == 0)
+            else
             {
                 MessageBox.Show("Not all fields are filled in");
             }
@@ -103,15 +90,23 @@ namespace Database_Libary
 
         private void clear_Click(object sender, RoutedEventArgs e)
         {
-            nameOfGame.Text = "";
+            Clear();
+        }
+
+        void Clear()
+        {
+            title.SelectedIndex = 0;
+            publisher.SelectedIndex = 0;
+            secondTitle.Text = "";
+            number.Text = "";
             genre.Text = "";
-            specialEdition.IsChecked = false;
-            nameOfGame.Focus();
+            CollectorsEdition.IsChecked = false;
+            title.Focus();
         }
 
         private void genre_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key != System.Windows.Input.Key.Enter) return;
+            if (e.Key != Key.Enter) return;
 
             if (genre.Focusable)
             {
@@ -145,7 +140,7 @@ namespace Database_Libary
             {
                 genreListbox.Items.Add(genre.Text);
                 removeLastGenre[i] = genre.Text;
-
+                
                 i++;
 
                 genre.Text = "";
@@ -153,11 +148,19 @@ namespace Database_Libary
             }
         }
 
-        void fillCombo(string querry, ComboBox c)
+        void fillCombo(string querry, ComboBox c, int getString)
         {
             c.Items.Clear();
             c.SelectedIndex = 0;
-            c.Items.Add("Select a publisher");
+
+            if (c == title)
+            {
+                c.Items.Add("Select a title");
+            }
+            else if (c == publisher)
+            {
+                c.Items.Add("Select a publisher");
+            }
 
             MySQL.con.Close();
 
@@ -165,12 +168,12 @@ namespace Database_Libary
             {
                 MySQL.con.Open();
 
-                cmd = new MySqlCommand(querry, MySQL.con);
-                reader = cmd.ExecuteReader();
+                MySQL.cmd = new MySqlCommand(querry, MySQL.con);
+                MySQL.rdr = MySQL.cmd.ExecuteReader();
 
-                while (reader.Read())
+                while (MySQL.rdr.Read())
                 {
-                    string name = reader.GetString(2);
+                    string name = MySQL.rdr.GetString(getString);
                     c.Items.Add(name);
                 }
 
@@ -186,7 +189,10 @@ namespace Database_Libary
                 }
             }
 
-            c.SelectionChanged += publisher_SelectionChanged;
+            if (c == publisher)
+            {
+                c.SelectionChanged += publisher_SelectionChanged;
+            }
         }
 
         private void publisher_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -194,12 +200,21 @@ namespace Database_Libary
             string index = publisher.SelectedIndex.ToString();
 
             int id = int.Parse(index);
-
+                        
             addCreator Add = new addCreator(id);
 
             Add.Owner = this;
             Add.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             Add.Show();
+        }
+
+        private void addTitle_Click(object sender, RoutedEventArgs e)
+        {
+            addTitleAndPublisher Add = new addTitleAndPublisher();
+
+            Add.Owner = this;
+            Add.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            Add.ShowDialog();
         }
     }
 }
