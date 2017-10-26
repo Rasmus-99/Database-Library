@@ -8,7 +8,8 @@
         Title="Warning"
         Width="310"
         Height="186.4"
-        ResizeMode="NoResize">
+        ResizeMode="CanMinimize"
+        >
 
     <Grid>
 
@@ -22,7 +23,7 @@
             />
 
         <Label
-            x:Name="name"
+            x:Name="game"
             Content="Name of game"
             Width="275"
             Height="30"

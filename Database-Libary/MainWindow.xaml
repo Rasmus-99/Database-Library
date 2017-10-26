@@ -7,35 +7,37 @@
         mc:Ignorable="d"
         Title="Main Window"
         Height="570"
-        Width="565"
-        ResizeMode="NoResize">
+        Width="600"
+        WindowStartupLocation="CenterScreen"
+        >
 
     <Grid>
 
-        <Menu x:Name="dropdown" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="45" MinHeight="20" Height="20" Width="45">
-            <MenuItem Header="Menu" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <MenuItem x:Name="addGame" Header="Add Game" HorizontalAlignment="Left" VerticalAlignment="Top" Click="addGame_Click"/>
-            </MenuItem>
-        </Menu>
-
         <DataGrid
             x:Name="listOfGames"
-            Width="535"
-            Height="490"
-            Margin="10,35,0,0"
-            VerticalAlignment="Top"
-            HorizontalAlignment="Left"
+            Margin="0,35,0,0"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
             IsReadOnly="True"
             MouseDoubleClick="DataGridRow_MouseDoubleClick"
-        />
+            />
+
+        <Button
+            x:Name="add"
+            Content="Add Game"
+            Width="95"
+            Margin="8,8,0,0"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left" Click="add_Click"
+            />
 
         <Button
             x:Name="remove"
             Content="Remove Game"
             Width="95"
-            Margin="450,8,0,0"
+            Margin="0,8,8,0"
             VerticalAlignment="Top"
-            HorizontalAlignment="Left"
+            HorizontalAlignment="Right"
             Click="remove_Click"
             />
 

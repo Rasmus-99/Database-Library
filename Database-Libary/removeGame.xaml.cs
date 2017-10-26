@@ -32,6 +32,7 @@ namespace Database_Libary
 
         private void RemoveGame_Click(object sender, RoutedEventArgs e)
         {
+            /*
             if (mysql.checkGame(nameOfGame.Text))
             {
                 removeWarning RemoveWarning = new removeWarning(nameOfGame.Text);
@@ -52,6 +53,7 @@ namespace Database_Libary
                 nameOfGame.Text = "";
                 nameOfGame.Focus();
             }
+            */
         }
     }
 }

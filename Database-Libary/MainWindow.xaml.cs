@@ -37,7 +37,7 @@ namespace Database_Libary
 
         public void showGames()
         {
-            MySQL.sql = "SELECT p.Title, g.Number, g.SecondTitle, g.CollectorsEdition, g.Genre, p.Publishers, g.Developers FROM games AS g INNER JOIN publishers AS p ON g.Title_ID = p.ID";
+            MySQL.sql = "SELECT p.Title, g.Number, g.SecondTitle, g.CollectorsEdition, g.Genre, p.Publisher, g.Developers FROM games AS g INNER JOIN publishers AS p ON g.Title_ID = p.ID";
 
             MySQL.adapter = new MySqlDataAdapter(MySQL.sql, MySQL.con);
 
@@ -47,8 +47,8 @@ namespace Database_Libary
             listOfGames.ItemsSource = ds.Tables[0].DefaultView;
         }
 
-        private void addGame_Click(object sender, RoutedEventArgs e)
-        {            
+        private void add_Click(object sender, RoutedEventArgs e)
+        {
             addGame Add = new addGame();
 
             Add.updateListAdd += updateList;
@@ -60,16 +60,25 @@ namespace Database_Libary
 
         private void remove_Click(object sender, RoutedEventArgs e)
         {
-            DataRowView dataRow = (DataRowView)listOfGames.SelectedItems[0];
-            string selectedRow = dataRow["SecondTitle"].ToString();
+            try
+            {
+                DataRowView dataRow = (DataRowView)listOfGames.SelectedItems[0];
+                string title = dataRow["Title"].ToString();
+                string number = dataRow["Number"].ToString();
+                string secondTitle = dataRow["SecondTitle"].ToString();
 
-            removeWarning RemoveWarning = new removeWarning(selectedRow);
+                removeWarning RemoveWarning = new removeWarning(title, number, secondTitle);
 
-            RemoveWarning.Owner = this;
-            RemoveWarning.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            RemoveWarning.ShowDialog();
+                RemoveWarning.Owner = this;
+                RemoveWarning.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                RemoveWarning.ShowDialog();
 
-            updateList();
+                updateList();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error!\nNo game selected", "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         
         public void updateList()

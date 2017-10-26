@@ -8,7 +8,8 @@
         Title="Remove game"
         Width="375"
         Height="85"
-        ResizeMode="NoResize">
+        ResizeMode="CanMinimize"
+        >
 
     <Grid>
 

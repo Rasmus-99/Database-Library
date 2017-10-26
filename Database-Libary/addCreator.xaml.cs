@@ -30,7 +30,7 @@ namespace Database_Libary
         {
             InitializeComponent();
 
-            fillList(id);
+            fillList(listboxLeft, id);
         }
 
         private void moveToRight_Click(object sender, RoutedEventArgs e)
@@ -58,7 +58,7 @@ namespace Database_Libary
 
         }
 
-        void fillList(int id)
+        void fillList(ListBox lsbox, int id)
         {
             MySQL.sql = "SELECT Developer FROM developers WHERE Publisher_ID = '" + id + "'";
             MySQL.cmd = new MySqlCommand(MySQL.sql, MySQL.con);
@@ -72,6 +72,7 @@ namespace Database_Libary
             }
 
             MySQL.con.Close();
+            lsbox.Items.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
         }
 
         void moveItems(ListBox lstFrom, ListBox lstTo)
@@ -109,11 +110,6 @@ namespace Database_Libary
 
         private void addDeveloper_Click(object sender, RoutedEventArgs e)
         {
-            addDeveloper Add = new addDeveloper();
-
-            Add.Owner = this;
-            Add.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            Add.ShowDialog();
         }
     }
 }

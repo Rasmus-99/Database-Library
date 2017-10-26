@@ -20,18 +20,20 @@ namespace Database_Libary
         public static string sql;
         public static string nameOfGame;
 
-        bool result = false;
+        public static string result_string = "";
+
+        bool result_bool = false;
 
         public string textToBring { get; set; }
 
         public bool insertgames(int title_ID, string number, string secondTitle, string collectorsEdition, string genre, int publisher_ID, string developers)
         {
-            result = false;
+            result_bool = false;
             string text = "";
 
             try
             {
-                sql = "SELECT * FROM games WHERE Title_ID = '" + title_ID + "'";
+                sql = "SELECT * FROM games WHERE SecondTitle = '" + secondTitle + "'";
                 check = new MySqlCommand(sql, con);
                 con.Open();
                 rdr= check.ExecuteReader();
@@ -48,23 +50,6 @@ namespace Database_Libary
                     cmd.ExecuteNonQuery();
                     con.Close();
 
-                    if (secondTitle == "" && number == "")
-                    {
-                        text = nameOfGame;
-                    }
-                    else if (secondTitle != "" && number == "")
-                    {
-                        text = nameOfGame + " " + secondTitle;
-                    }
-                    else if (secondTitle == "" && number != "")
-                    {
-                        text = nameOfGame + " " + number;
-                    }
-                    else if (secondTitle != "" && number != "")
-                    {
-                        text = nameOfGame + " " + number + " " + secondTitle;
-                    }
-
                     MessageBox.Show("Successfully added " + text + " to the list!");
 
                     nameOfGame = "";
@@ -74,15 +59,15 @@ namespace Database_Libary
                     genre = "";
                     publisher_ID = 0;
                     developers = "";
-                    
-                    result = true;
+
+                    result_bool = true;
                 }
                 else
                 {
                     con.Close();
                     MessageBox.Show("Game already exists");
 
-                    result = false;
+                    result_bool = false;
                 }
             }
             catch (Exception exc)
@@ -95,16 +80,16 @@ namespace Database_Libary
                 }
             }
 
-            return result;
+            return result_bool;
         }
 
         public bool insertTitlePublisher(string title, string publisher)
         {
-            result = false;
+            result_bool = false;
 
             try
             {
-                sql = "SELECT * FROM games WHERE Title = '" + title + "'";
+                sql = "SELECT * FROM publishers WHERE Title = '" + title + "' AND Publisher = '" + publisher + "'";
 
                 check = new MySqlCommand(sql, con);
                 con.Open();
@@ -114,7 +99,7 @@ namespace Database_Libary
                 {
                     con.Close();
 
-                    sql = "INSERT INTO games (Title, Publishers) VALUES('" + title + "','" + publisher + "')";
+                    sql = "INSERT INTO publishers (Title, Publisher) VALUES('" + title + "','" + publisher + "')";
 
                     cmd = new MySqlCommand(sql, con);
 
@@ -124,14 +109,14 @@ namespace Database_Libary
 
                     MessageBox.Show("Successfully added " + title + " to the list!");
 
-                    result = true;
+                    result_bool = true;
                 }
                 else
                 {
                     con.Close();
                     MessageBox.Show("Title and publisher already exists");
 
-                    result = false;
+                    result_bool = false;
                 }
             }
             catch (Exception exc)
@@ -144,18 +129,18 @@ namespace Database_Libary
                 }
             }
 
-            return result;
+            return result_bool;
         }
 
-        public bool removeGame(string title_ID)
+        public bool removeGame(string secondName)
         {
-            result = false;
+            result_bool = false;
 
             try
             {
                 //This is the command
                 //sql = "DELETE FROM games WHERE Title_ID = '" + title_ID + "'";
-                sql = "DELETE FROM games WHERE SecondTitle = '" + title_ID + "'";
+                sql = "DELETE FROM games WHERE SecondTitle = '" + secondName + "'";
 
                 //This handles the connection and the query
                 cmd = new MySqlCommand(sql, con);
@@ -166,25 +151,25 @@ namespace Database_Libary
                 //Executes the query and saves the data to the database
                 cmd.ExecuteNonQuery();
 
-                MessageBox.Show("Successfully removed " + title_ID + " from the list!");
+                MessageBox.Show("Successfully removed " + result_string + " from the list!");
 
                 //Closes the connection to the database
                 con.Close();
 
-                result = true;
+                result_bool = true;
             }
             catch (Exception ex)
             {
-                result = false;
+                result_bool = false;
                 MessageBox.Show(ex.Message);
             }
 
-            return result;
+            return result_bool;
         }
 
         public bool checkGame(string name)
         {
-            result = false;
+            result_bool = false;
 
             //sql = "SELECT * FROM games WHERE NameOFGame = '" + name + "'";
             cmd = new MySqlCommand(sql, con);
@@ -193,12 +178,35 @@ namespace Database_Libary
 
             if (rdr.Read())
             {
-                result = true;
+                result_bool = true;
             }
 
             con.Close();
 
-            return result;
+            return result_bool;
+        }
+
+        public bool checkString(string number, string secondTitle)
+        {
+            if (number == "" && secondTitle == "")
+            {
+                result_string = nameOfGame;
+            }
+            else if (number != "" && secondTitle == "")
+            {
+                result_string = nameOfGame + " " + number;
+            }
+            else if (number == "" && secondTitle != "")
+            {
+                result_string = nameOfGame + " - " + secondTitle;
+            }
+            else if (number != "" && secondTitle != "")
+            {
+                result_string = nameOfGame + " " + number + " - " + secondTitle;
+            }
+
+            return result_bool = true;
+
         }
     }
 }

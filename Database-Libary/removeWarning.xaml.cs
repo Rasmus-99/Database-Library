@@ -20,19 +20,55 @@ namespace Database_Libary
     public partial class removeWarning : Window
     {
         MySQL mysql = new MySQL();
+        
+        string text = "";
+        string title = "";
+        string number = "";
+        string secondTitle = "";
 
-        public removeWarning(string NameTobring)
+        public removeWarning(string title_game, string number_game, string secondTitle_game)
         {
             InitializeComponent();
-            name.Content = NameTobring;
+
+            if (number_game == "" && secondTitle_game == "")
+            {
+                text = title_game;
+            }
+            else if (number_game != "" && secondTitle_game == "")
+            {
+                text = title_game + " " + number_game;
+            }
+            else if (number_game == "" && secondTitle_game != "")
+            {
+                text = title_game + " - " + secondTitle_game;
+            }
+            else if (number_game != "" && secondTitle_game != "")
+            {
+                text = title_game + " " + number_game + " - " + secondTitle_game;
+            }
+
+            game.Content = text;
             cancel.Focus();
+
+            title = title_game;
+            number = number_game;
+            secondTitle = secondTitle_game;
+
+            title_game = "";
+            number_game = "";
+            secondTitle_game = "";
         }
 
         private void removeGame_Click(object sender, RoutedEventArgs e)
         {
-            if (mysql.removeGame(name.Content.ToString()))
+            if (mysql.checkString(number, secondTitle))
             {
-                this.Close();
+                MySQL.result_string = text;
+
+                if (mysql.removeGame(secondTitle))
+                {
+                    this.Close();
+                }
             }
         }
 

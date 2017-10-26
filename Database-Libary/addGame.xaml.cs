@@ -216,5 +216,14 @@ namespace Database_Libary
             Add.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             Add.ShowDialog();
         }
+
+        private void addDeveloper_Click(object sender, RoutedEventArgs e)
+        {
+            addDeveloper Add = new addDeveloper();
+
+            Add.Owner = this;
+            Add.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            Add.ShowDialog();
+        }
     }
 }
