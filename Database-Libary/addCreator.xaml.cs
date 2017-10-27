@@ -107,9 +107,5 @@ namespace Database_Libary
 
             this.Close();
         }
-
-        private void addDeveloper_Click(object sender, RoutedEventArgs e)
-        {
-        }
     }
 }

@@ -50,12 +50,14 @@ namespace Database_Libary
                     MySQL.con.Close();
 
                     MessageBox.Show("Successfully added " + textAdd.Text + " to the list!");
-                    textAdd.Clear();
-                    textAdd.Focus();
+
+                    this.Close();
                 }
                 else
                 {
                     MySQL.con.Close();
+                    textAdd.Clear();
+                    textAdd.Focus();
                     MessageBox.Show("Developer already exists");
                 }
             }

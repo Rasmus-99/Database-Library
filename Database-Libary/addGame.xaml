@@ -136,6 +136,18 @@
             HorizontalAlignment="Left"
             />
 
+        <TextBox
+            x:Name="test_text"
+            Margin="235,290,0,0"
+            Width="100"
+            Height="35"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            HorizontalAlignment="Left"
+            Padding="2"
+            Visibility="Hidden"
+            />
+
         <ListBox
             x:Name="genreListbox"
             Width="130"

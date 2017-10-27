@@ -90,7 +90,7 @@ namespace Database_Libary
 
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("This is a test");
+            //MessageBox.Show("This is a test");
         }
     }
 }

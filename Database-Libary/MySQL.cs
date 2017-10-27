@@ -50,7 +50,7 @@ namespace Database_Libary
                     cmd.ExecuteNonQuery();
                     con.Close();
 
-                    MessageBox.Show("Successfully added " + text + " to the list!");
+                    MessageBox.Show("Successfully added " + result_string + " to the list!");
 
                     nameOfGame = "";
                     number = "";

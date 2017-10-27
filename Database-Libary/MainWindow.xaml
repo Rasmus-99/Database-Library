@@ -28,7 +28,8 @@
             Width="95"
             Margin="8,8,0,0"
             VerticalAlignment="Top"
-            HorizontalAlignment="Left" Click="add_Click"
+            HorizontalAlignment="Left"
+            Click="add_Click"
             />
 
         <Button

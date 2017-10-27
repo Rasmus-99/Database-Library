@@ -73,13 +73,16 @@ namespace Database_Libary
                 }
                 
                 genres = genres.Remove(genres.Length - 3);
-
+                
                 MySQL.nameOfGame = title.Text;
 
-                if (mysql.insertgames(title.SelectedIndex, number.Text, secondTitle.Text, CollectorsEdition_string, genres, publisher.SelectedIndex, addCreator.developer))
+                if (mysql.checkString(number.Text, secondTitle.Text))
                 {
-                    if (updateListAdd != null) updateListAdd();
-                    this.Close();
+                    if (mysql.insertgames(title.SelectedIndex, number.Text, secondTitle.Text, CollectorsEdition_string, genres, publisher.SelectedIndex, addCreator.developer))
+                    {
+                        if (updateListAdd != null) updateListAdd();
+                        this.Close();
+                    }
                 }
             }
             else
