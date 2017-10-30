@@ -206,7 +206,6 @@ namespace Database_Libary
             }
 
             return result_bool = true;
-
         }
     }
 }

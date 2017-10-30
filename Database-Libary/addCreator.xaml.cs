@@ -51,11 +51,13 @@ namespace Database_Libary
             }
 
             listboxLeft.Items.Clear();
+            
+            MessageBox.Show("This button doesn't work");
         }
 
         private void moveAllToLeft_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("This button doesn't work");
         }
 
         void fillList(ListBox lsbox, int id)

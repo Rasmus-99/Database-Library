@@ -14,7 +14,7 @@
     <Grid>
 
         <Label
-            Content="Name of game:"
+            Content="Name of title:"
             Margin="5,5,0,0"
             Width="120"
             Height="35"
