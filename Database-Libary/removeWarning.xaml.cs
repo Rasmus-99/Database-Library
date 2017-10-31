@@ -65,7 +65,7 @@ namespace Database_Libary
             {
                 MySQL.result_string = text;
 
-                if (mysql.removeGame(secondTitle))
+                if (mysql.removeGame(number, secondTitle))
                 {
                     this.Close();
                 }

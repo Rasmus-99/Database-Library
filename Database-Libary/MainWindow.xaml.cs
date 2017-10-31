@@ -31,8 +31,7 @@ namespace Database_Libary
 
             showGames();
 
-            //Sorts the DataGrid
-            listOfGames.Items.SortDescriptions.Add(new SortDescription("Title", ListSortDirection.Ascending));
+            sortList(listOfGames);
         }
 
         public void showGames()
@@ -47,6 +46,22 @@ namespace Database_Libary
             listOfGames.ItemsSource = ds.Tables[0].DefaultView;
         }
 
+        void sortList(DataGrid dg)
+        {
+            //Sorts the DataGrid in multiple columns
+
+            ICollectionView view =
+                    CollectionViewSource.GetDefaultView(dg.ItemsSource);
+
+            view.SortDescriptions.Clear();
+
+            SortDescription sd = new SortDescription("Title", ListSortDirection.Ascending);
+            view.SortDescriptions.Add(sd);
+
+            sd = new SortDescription("Number", ListSortDirection.Ascending);
+            view.SortDescriptions.Add(sd);
+        }
+
         private void add_Click(object sender, RoutedEventArgs e)
         {
             addGame Add = new addGame();
@@ -55,14 +70,41 @@ namespace Database_Libary
 
             Add.Owner = this;
             Add.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            Add.Show();
+            Add.ShowDialog();
+
+            sortList(listOfGames);
         }
 
         private void remove_Click(object sender, RoutedEventArgs e)
         {
+            removeGame(listOfGames);
+        }
+        
+        public void updateList()
+        {
+            listOfGames.ItemsSource = null;
+            listOfGames.Items.Clear();
+            showGames();
+        }
+
+        private void listOfGames_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.Delete) return;
+
+            if (listOfGames.Focusable)
+            {
+                removeGame(listOfGames);
+            }
+
+            e.Handled = true;
+            sortList(listOfGames);
+        }
+
+        void removeGame(DataGrid dg)
+        {
             try
             {
-                DataRowView dataRow = (DataRowView)listOfGames.SelectedItems[0];
+                DataRowView dataRow = (DataRowView)dg.SelectedItems[0];
                 string title = dataRow["Title"].ToString();
                 string number = dataRow["Number"].ToString();
                 string secondTitle = dataRow["SecondTitle"].ToString();
@@ -79,18 +121,6 @@ namespace Database_Libary
             {
                 MessageBox.Show("Error!\nNo game selected", "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
-        
-        public void updateList()
-        {
-            listOfGames.ItemsSource = null;
-            listOfGames.Items.Clear();
-            showGames();
-        }
-
-        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            MessageBox.Show("This is a test");
         }
     }
 }

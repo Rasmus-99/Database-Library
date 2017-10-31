@@ -29,11 +29,10 @@ namespace Database_Libary
         public bool insertgames(int title_ID, string number, string secondTitle, string collectorsEdition, string genre, int publisher_ID, string developers)
         {
             result_bool = false;
-            string text = "";
 
             try
             {
-                sql = "SELECT * FROM games WHERE SecondTitle = '" + secondTitle + "'";
+                sql = "SELECT * FROM games WHERE Number = '" + number + "' AND SecondTitle = '" + secondTitle + "'";
                 check = new MySqlCommand(sql, con);
                 con.Open();
                 rdr= check.ExecuteReader();
@@ -132,15 +131,14 @@ namespace Database_Libary
             return result_bool;
         }
 
-        public bool removeGame(string secondName)
+        public bool removeGame(string number, string secondTitle)
         {
             result_bool = false;
 
             try
             {
                 //This is the command
-                //sql = "DELETE FROM games WHERE Title_ID = '" + title_ID + "'";
-                sql = "DELETE FROM games WHERE SecondTitle = '" + secondName + "'";
+                sql = "DELETE FROM games WHERE Number = '" + number + "' AND SecondTitle = '" + secondTitle + "'";
 
                 //This handles the connection and the query
                 cmd = new MySqlCommand(sql, con);

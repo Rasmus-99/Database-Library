@@ -35,29 +35,22 @@ namespace Database_Libary
 
         private void moveToRight_Click(object sender, RoutedEventArgs e)
         {
-            moveItems(listboxLeft, listboxRight);
+            moveItem(listboxLeft, listboxRight);
         }
 
         private void moveToLeft_Click(object sender, RoutedEventArgs e)
         {
-            moveItems(listboxRight, listboxLeft);
+            moveItem(listboxRight, listboxLeft);
         }
 
         private void moveAllToRight_Click(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < listboxLeft.Items.Count; i++)
-            {
-                listboxRight.Items.Add(listboxLeft.Items);
-            }
-
-            listboxLeft.Items.Clear();
-            
-            MessageBox.Show("This button doesn't work");
+            moveItems(listboxLeft, listboxRight);
         }
 
         private void moveAllToLeft_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("This button doesn't work");
+            moveItems(listboxRight, listboxLeft);
         }
 
         void fillList(ListBox lsbox, int id)
@@ -77,7 +70,7 @@ namespace Database_Libary
             lsbox.Items.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
         }
 
-        void moveItems(ListBox lstFrom, ListBox lstTo)
+        void moveItem(ListBox lstFrom, ListBox lstTo)
         {
             try
             {
@@ -94,6 +87,16 @@ namespace Database_Libary
             {
                 MessageBox.Show(exc.Message);
             }
+        }
+
+        void moveItems(ListBox lsFrom, ListBox lsTo)
+        {
+            for (int i = 0; i < lsFrom.Items.Count; i++)
+            {
+                lsTo.Items.Add(lsFrom.Items[i]);
+            }
+
+            lsFrom.Items.Clear();
         }
 
         private void save_Click(object sender, RoutedEventArgs e)

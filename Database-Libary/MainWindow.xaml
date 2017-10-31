@@ -18,8 +18,7 @@
             Margin="0,35,0,0"
             VerticalAlignment="Stretch"
             HorizontalAlignment="Stretch"
-            IsReadOnly="True"
-            MouseDoubleClick="DataGridRow_MouseDoubleClick"
+            IsReadOnly="True" KeyUp="listOfGames_KeyUp"
             />
 
         <Button
