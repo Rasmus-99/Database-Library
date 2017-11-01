@@ -36,7 +36,7 @@ namespace Database_Libary
 
         public void showGames()
         {
-            MySQL.sql = "SELECT p.Title, g.Number, g.SecondTitle, g.CollectorsEdition, g.Genre, p.Publisher, g.Developers FROM games AS g INNER JOIN publishers AS p ON g.Title_ID = p.ID";
+            MySQL.sql = "SELECT p.Title, g.Number, g.SecondTitle, g.CollectorsEdition, g.Genre, p.Publisher, g.Developers, pl.Platform FROM games AS g INNER JOIN publishers AS p ON g.Title_ID = p.ID INNER JOIN platform AS pl ON Platform_ID = pl.ID";
 
             MySQL.adapter = new MySqlDataAdapter(MySQL.sql, MySQL.con);
 
@@ -59,6 +59,9 @@ namespace Database_Libary
             view.SortDescriptions.Add(sd);
 
             sd = new SortDescription("Number", ListSortDirection.Ascending);
+            view.SortDescriptions.Add(sd);
+
+            sd = new SortDescription("Platform", ListSortDirection.Ascending);
             view.SortDescriptions.Add(sd);
         }
 
@@ -105,11 +108,13 @@ namespace Database_Libary
             try
             {
                 DataRowView dataRow = (DataRowView)dg.SelectedItems[0];
+                
                 string title = dataRow["Title"].ToString();
                 string number = dataRow["Number"].ToString();
                 string secondTitle = dataRow["SecondTitle"].ToString();
+                string platform = dataRow["Platform"].ToString();
 
-                removeWarning RemoveWarning = new removeWarning(title, number, secondTitle);
+                removeWarning RemoveWarning = new removeWarning(title, number, secondTitle, platform);
 
                 RemoveWarning.Owner = this;
                 RemoveWarning.WindowStartupLocation = WindowStartupLocation.CenterOwner;

@@ -25,8 +25,9 @@ namespace Database_Libary
         string title = "";
         string number = "";
         string secondTitle = "";
+        string platform = "";
 
-        public removeWarning(string title_game, string number_game, string secondTitle_game)
+        public removeWarning(string title_game, string number_game, string secondTitle_game, string platform_game)
         {
             InitializeComponent();
 
@@ -53,10 +54,12 @@ namespace Database_Libary
             title = title_game;
             number = number_game;
             secondTitle = secondTitle_game;
+            platform = platform_game;
 
             title_game = "";
             number_game = "";
             secondTitle_game = "";
+            platform_game = "";
         }
 
         private void removeGame_Click(object sender, RoutedEventArgs e)
@@ -65,7 +68,7 @@ namespace Database_Libary
             {
                 MySQL.result_string = text;
 
-                if (mysql.removeGame(number, secondTitle))
+                if (mysql.removeGame(number, secondTitle, platform))
                 {
                     this.Close();
                 }

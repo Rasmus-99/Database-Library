@@ -44,19 +44,30 @@ namespace Database_Libary
 
             fillCombo("SELECT * FROM publishers", title, 1);
             fillCombo("SELECT * FROM publishers", publisher, 2);
+            fillCombo("SELECT * FROM platform", platform, 1);
         }
 
         private void AddGame_Click(object sender, RoutedEventArgs e)
         {
-            if (title.Text != "Select a title" && publisher.Text != "Select a publisher" && (genre.Text != "" || genreListbox.Items.Count > 0))
+            bool isNotValid = false;
+
+            if (CollectorsEdition.IsChecked == true)
             {
-                if (CollectorsEdition.IsChecked == true)
+                if (string.IsNullOrWhiteSpace(CollectorsName.Text))
                 {
-                    CollectorsEdition_string = "Yes";
+                    isNotValid = true;
+                }
+            }
+
+            if (title.SelectedIndex != 0 && publisher.SelectedIndex != 0 && !isNotValid && (genre.Text != "" || genreListbox.Items.Count > 0) && platform.SelectedIndex != 0)
+            {
+                if (CollectorsName.Text != "")
+                {
+                    CollectorsEdition_string = CollectorsName.Text;
                 }
                 else
                 {
-                    CollectorsEdition_string = "No";
+                    CollectorsEdition_string = CollectorsName.Text;
                 }
 
                 if (genre.Text != "")
@@ -78,7 +89,7 @@ namespace Database_Libary
 
                 if (mysql.checkString(number.Text, secondTitle.Text))
                 {
-                    if (mysql.insertgames(title.SelectedIndex, number.Text, secondTitle.Text, CollectorsEdition_string, genres, publisher.SelectedIndex, addCreator.developer))
+                    if (mysql.insertgames(title.SelectedIndex, number.Text, secondTitle.Text, CollectorsEdition_string, genres, publisher.SelectedIndex, addCreator.developer, platform.SelectedIndex))
                     {
                         if (updateListAdd != null) updateListAdd();
                         this.Close();
@@ -87,6 +98,7 @@ namespace Database_Libary
             }
             else
             {
+                isNotValid = true;
                 MessageBox.Show("Not all fields are filled in");
             }
         }
@@ -100,6 +112,7 @@ namespace Database_Libary
         {
             title.SelectedIndex = 0;
             publisher.SelectedIndex = 0;
+            platform.SelectedIndex = 0;
             secondTitle.Text = "";
             number.Text = "";
             genre.Text = "";
@@ -164,6 +177,10 @@ namespace Database_Libary
             {
                 c.Items.Add("Select a publisher");
             }
+            else if (c == platform)
+            {
+                c.Items.Add("Select a platform");
+            }
 
             MySQL.con.Close();
 
@@ -227,6 +244,16 @@ namespace Database_Libary
             Add.Owner = this;
             Add.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             Add.ShowDialog();
+        }
+
+        private void CollectorsEdition_Checked(object sender, RoutedEventArgs e)
+        {
+            CollectorsName.Visibility = Visibility.Visible;
+        }
+
+        private void CollectorsEdition_Unchecked(object sender, RoutedEventArgs e)
+        {
+            CollectorsName.Visibility = Visibility.Hidden;
         }
     }
 }

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Add game"
         Width="365"
-        Height="405"
+        Height="446.4"
         ResizeMode="CanMinimize"
         >
 
@@ -116,39 +116,6 @@
             Click="addGenre_Click"
             />
 
-        <Label
-            Content="Collector's Edition:"
-            Margin="10,290,0,0"
-            Width="100"
-            Height="35"
-            VerticalAlignment="Top"
-            VerticalContentAlignment="Center"
-            HorizontalAlignment="Left"
-            Padding="2"
-            />
-
-        <CheckBox
-            x:Name="CollectorsEdition"
-            Width="15"
-            Height="15"
-            Margin="150,301,0,0"
-            VerticalAlignment="Top"
-            HorizontalAlignment="Left"
-            />
-
-        <TextBox
-            x:Name="test_text"
-            Text="Collector's Name"
-            Margin="235,290,0,0"
-            Width="100"
-            Height="35"
-            VerticalAlignment="Top"
-            VerticalContentAlignment="Center"
-            HorizontalAlignment="Left"
-            Padding="2"
-            IsEnabled="False"
-            />
-
         <ListBox
             x:Name="genreListbox"
             Width="130"
@@ -168,24 +135,66 @@
             Click="removeGenre_Click"
             />
 
-        <Button
-            x:Name="AddGame"
-            Content="Add Game"
-            Width="130"
-            Margin="215,335,0,0"
+        <Label
+            Content="Collector's Edition:"
+            Margin="10,290,0,0"
+            Width="100"
+            Height="35"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            HorizontalAlignment="Left"
+            Padding="2"
+            />
+
+        <CheckBox
+            x:Name="CollectorsEdition"
+            Width="15"
+            Height="15"
+            Margin="150,301,0,0"
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
-            Click="AddGame_Click"
+            Checked="CollectorsEdition_Checked"
+            Unchecked="CollectorsEdition_Unchecked"
+            />
+
+        <TextBox
+            x:Name="CollectorsName"
+            Margin="205,290,0,0"
+            Width="140"
+            Height="35"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            HorizontalAlignment="Left"
+            Padding="2"
+            Visibility="Hidden"
             />
 
         <Button
             x:Name="clear"
             Content="Clear"
             Width="130"
-            Margin="15,335,0,0"
-            VerticalAlignment="Top"
+            Margin="10,0,0,20"
+            VerticalAlignment="Bottom"
             HorizontalAlignment="Left"
             Click="clear_Click"
+            />
+
+        <Button
+            x:Name="AddGame"
+            Content="Add Game"
+            Width="130"
+            Margin="0,0,10,20"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Right"
+            Click="AddGame_Click"
+            />
+
+        <ComboBox
+            x:Name="platform"
+            Width="160"
+            Margin="10,330,0,0"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"            
             />
 
     </Grid>

@@ -11,7 +11,8 @@ namespace Database_Libary
 {
     public class MySQL
     {
-        public static MySqlConnection con = new MySqlConnection("host=localhost;user=root;database=library;");
+        //public static MySqlConnection con = new MySqlConnection("host=localhost;user=root;database=library;");
+        public static MySqlConnection con = new MySqlConnection("host=10.11.4.150;user=rasmus;password=ubuntu;database=Rasmus_library;");
         public static MySqlCommand check;
         public static MySqlCommand cmd;
         public static MySqlDataReader rdr;
@@ -26,13 +27,13 @@ namespace Database_Libary
 
         public string textToBring { get; set; }
 
-        public bool insertgames(int title_ID, string number, string secondTitle, string collectorsEdition, string genre, int publisher_ID, string developers)
+        public bool insertgames(int title_ID, string number, string secondTitle, string collectorsEdition, string genre, int publisher_ID, string developers, int platform_ID)
         {
             result_bool = false;
 
             try
             {
-                sql = "SELECT * FROM games WHERE Number = '" + number + "' AND SecondTitle = '" + secondTitle + "'";
+                sql = "SELECT * FROM games WHERE Number = '" + number + "' AND SecondTitle = '" + secondTitle + "' AND Platform_ID = '" + platform_ID + "'";
                 check = new MySqlCommand(sql, con);
                 con.Open();
                 rdr= check.ExecuteReader();
@@ -41,7 +42,7 @@ namespace Database_Libary
                 {
                     con.Close();
 
-                    sql = "INSERT INTO games (Title_ID, Number, SecondTitle, CollectorsEdition, Genre, Publisher_ID, Developers) VALUES('" + title_ID + "','" + number + "','" + secondTitle + "','" + collectorsEdition + "','" + genre + "','" + publisher_ID + "','" + developers + "')";
+                    sql = "INSERT INTO games (Title_ID, Number, SecondTitle, CollectorsEdition, Genre, Publisher_ID, Developers, platform_ID) VALUES('" + title_ID + "','" + number + "','" + secondTitle + "','" + collectorsEdition + "','" + genre + "','" + publisher_ID + "','" + developers + "','" + platform_ID + "')";
 
                     cmd = new MySqlCommand(sql, con);
 
@@ -58,6 +59,7 @@ namespace Database_Libary
                     genre = "";
                     publisher_ID = 0;
                     developers = "";
+                    platform_ID = 0;
 
                     result_bool = true;
                 }
@@ -131,14 +133,14 @@ namespace Database_Libary
             return result_bool;
         }
 
-        public bool removeGame(string number, string secondTitle)
+        public bool removeGame(string number, string secondTitle, string platform)
         {
             result_bool = false;
 
             try
             {
                 //This is the command
-                sql = "DELETE FROM games WHERE Number = '" + number + "' AND SecondTitle = '" + secondTitle + "'";
+                sql = "DELETE FROM games WHERE Number = '" + number + "' AND SecondTitle = '" + secondTitle + /*"' AND Platform_ID = '" + platform + */"'";
 
                 //This handles the connection and the query
                 cmd = new MySqlCommand(sql, con);
