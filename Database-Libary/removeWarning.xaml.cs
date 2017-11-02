@@ -20,14 +20,15 @@ namespace Database_Libary
     public partial class removeWarning : Window
     {
         MySQL mysql = new MySQL();
-        
+
+        int id = 0;
         string text = "";
         string title = "";
         string number = "";
         string secondTitle = "";
         string platform = "";
 
-        public removeWarning(string title_game, string number_game, string secondTitle_game, string platform_game)
+        public removeWarning(int id_game, string title_game, string number_game, string secondTitle_game, string platform_game)
         {
             InitializeComponent();
 
@@ -48,14 +49,16 @@ namespace Database_Libary
                 text = title_game + " " + number_game + " - " + secondTitle_game;
             }
 
-            game.Content = text;
+            game.Content = text + " - " + platform_game;
             cancel.Focus();
 
+            id = id_game;
             title = title_game;
             number = number_game;
             secondTitle = secondTitle_game;
             platform = platform_game;
 
+            id_game = 0;
             title_game = "";
             number_game = "";
             secondTitle_game = "";
@@ -68,7 +71,7 @@ namespace Database_Libary
             {
                 MySQL.result_string = text;
 
-                if (mysql.removeGame(number, secondTitle, platform))
+                if (mysql.removeGame(id))
                 {
                     this.Close();
                 }

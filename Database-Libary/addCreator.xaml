@@ -42,6 +42,7 @@
             HorizontalAlignment="Left"
             HorizontalContentAlignment="Center"
             Click="moveToRight_Click"
+            TabIndex="1"
             />
 
         <Button
@@ -55,6 +56,7 @@
             HorizontalAlignment="Left"
             HorizontalContentAlignment="Center"
             Click="moveAllToRight_Click"
+            TabIndex="2"
             />
 
         <Button
@@ -68,6 +70,7 @@
             HorizontalAlignment="Left"
             HorizontalContentAlignment="Center"
             Click="moveAllToLeft_Click"
+            TabIndex="3"
             />
 
         <Button
@@ -81,6 +84,7 @@
             HorizontalAlignment="Left"
             HorizontalContentAlignment="Center"
             Click="moveToLeft_Click"
+            TabIndex="4"
             />
 
         <Button
@@ -91,6 +95,7 @@
             VerticalAlignment="Top"
             HorizontalAlignment="Right"
             Click="save_Click"
+            TabIndex="5"
             />
 
     </Grid>

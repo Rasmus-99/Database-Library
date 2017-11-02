@@ -34,6 +34,7 @@
             VerticalContentAlignment="Center"
             HorizontalAlignment="Left"
             Padding="2"
+            TabIndex="1"
             />
 
         <Label
@@ -57,6 +58,7 @@
             VerticalContentAlignment="Center"
             HorizontalAlignment="Left"
             Padding="2"
+            TabIndex="2"
             />
 
         <Button
@@ -67,6 +69,7 @@
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
             Click="btnAdd_Click"
+            TabIndex="3"
             />
     </Grid>
 </Window>

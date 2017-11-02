@@ -17,6 +17,7 @@
             <MenuItem Header="Menu" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <MenuItem x:Name="addDeveloper" Header="Add developer to the list" HorizontalAlignment="Left" VerticalAlignment="Top" Click="addDeveloper_Click"/>
                 <MenuItem x:Name="addTitle" Header="Add a game title and publisher to the list" HorizontalAlignment="Left" VerticalAlignment="Top" Click="addTitle_Click"/>
+                <MenuItem x:Name="resetAI" Header="Reset Auto Increment" HorizontalAlignment="Left" VerticalAlignment="Top" Click="resetAI_Click"/>
             </MenuItem>
         </Menu>
 
@@ -25,7 +26,8 @@
             Width="160"
             Margin="10,40,0,0"
             VerticalAlignment="Top"
-            HorizontalAlignment="Left"            
+            HorizontalAlignment="Left"
+            TabIndex="1"
             />
 
         <ComboBox
@@ -33,7 +35,8 @@
             Width="160"
             Margin="10,80,0,0"
             VerticalAlignment="Top"
-            HorizontalAlignment="Left"            
+            HorizontalAlignment="Left"
+            TabIndex="2"      
             />
 
         <Label
@@ -57,6 +60,7 @@
             VerticalContentAlignment="Center"
             HorizontalAlignment="Left"
             Padding="2"
+            TabIndex="3"
             />
 
         <Label
@@ -80,6 +84,7 @@
             VerticalContentAlignment="Center"
             HorizontalAlignment="Left"
             Padding="2"
+            TabIndex="4"
             />
 
         <Label
@@ -104,6 +109,7 @@
             HorizontalAlignment="Left"
             Padding="2"
             KeyUp="genre_KeyUp"
+            TabIndex="5"
             />
 
         <Button
@@ -114,6 +120,7 @@
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
             Click="addGenre_Click"
+            TabIndex="6"
             />
 
         <ListBox
@@ -133,6 +140,7 @@
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
             Click="removeGenre_Click"
+            TabIndex="7"
             />
 
         <Label
@@ -155,6 +163,7 @@
             HorizontalAlignment="Left"
             Checked="CollectorsEdition_Checked"
             Unchecked="CollectorsEdition_Unchecked"
+            TabIndex="8"
             />
 
         <TextBox
@@ -167,6 +176,7 @@
             HorizontalAlignment="Left"
             Padding="2"
             Visibility="Hidden"
+            TabIndex="9"
             />
 
         <Button
@@ -177,6 +187,7 @@
             VerticalAlignment="Bottom"
             HorizontalAlignment="Left"
             Click="clear_Click"
+            TabIndex="11"
             />
 
         <Button
@@ -187,6 +198,7 @@
             VerticalAlignment="Bottom"
             HorizontalAlignment="Right"
             Click="AddGame_Click"
+            TabIndex="10"
             />
 
         <ComboBox

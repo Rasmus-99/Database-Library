@@ -32,6 +32,15 @@
             HorizontalAlignment="Left"
             />
 
+        <Label
+            Content="From the list??"
+            Margin="10,70,0,0"
+            Width="230"
+            Height="35"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"            
+            />
+
         <Button
 		    x:Name="removeGame"
 		    Content="Remove game"
@@ -44,6 +53,7 @@
 		    HorizontalContentAlignment="Center"
 		    Padding="2"
             Click="removeGame_Click"
+            TabIndex="1"
 		    />
 
         <Button
@@ -58,16 +68,8 @@
 		    HorizontalContentAlignment="Center"
 		    Padding="2"
             Click="cancel_Click"
+            TabIndex="2"
 		    />
-        
-        <Label
-            Content="From the list??"
-            Margin="10,70,0,0"
-            Width="230"
-            Height="35"
-            VerticalAlignment="Top"
-            HorizontalAlignment="Left"            
-            />
 
     </Grid>
 </Window>

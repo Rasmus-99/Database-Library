@@ -44,6 +44,7 @@
             VerticalContentAlignment="Center"
             HorizontalAlignment="Left"
             Padding="2"
+            TabIndex="1"
             />
 
         <Button
@@ -54,6 +55,7 @@
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
             Click="AddDeveloper_Click"
+            TabIndex="2"
             />
     </Grid>
 </Window>

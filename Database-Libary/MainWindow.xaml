@@ -20,6 +20,8 @@
             HorizontalAlignment="Stretch"
             IsReadOnly="True"
             KeyUp="listOfGames_KeyUp"
+            TabIndex="0"
+            MouseDoubleClick="listOfGames_MouseDoubleClick"
             />
 
         <Button
@@ -30,6 +32,7 @@
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
             Click="add_Click"
+            TabIndex="1"
             />
 
         <Button
@@ -40,7 +43,7 @@
             VerticalAlignment="Top"
             HorizontalAlignment="Right"
             Click="remove_Click"
+            TabIndex="2"
             />
-
     </Grid>
 </Window>

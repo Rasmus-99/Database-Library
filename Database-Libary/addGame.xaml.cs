@@ -50,8 +50,8 @@ namespace Database_Libary
         private void AddGame_Click(object sender, RoutedEventArgs e)
         {
             bool isNotValid = false;
-
-            if (CollectorsEdition.IsChecked == true)
+            
+            if (CollectorsEdition.IsChecked == true || number.Text != "")
             {
                 if (string.IsNullOrWhiteSpace(CollectorsName.Text))
                 {
@@ -67,7 +67,7 @@ namespace Database_Libary
                 }
                 else
                 {
-                    CollectorsEdition_string = CollectorsName.Text;
+                    CollectorsEdition_string = "No ";
                 }
 
                 if (genre.Text != "")
@@ -254,6 +254,11 @@ namespace Database_Libary
         private void CollectorsEdition_Unchecked(object sender, RoutedEventArgs e)
         {
             CollectorsName.Visibility = Visibility.Hidden;
+        }
+
+        private void resetAI_Click(object sender, RoutedEventArgs e)
+        {
+            mysql.resetAI();
         }
     }
 }

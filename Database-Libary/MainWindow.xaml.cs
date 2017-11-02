@@ -32,11 +32,13 @@ namespace Database_Libary
             showGames();
 
             sortList(listOfGames);
+
+            listOfGames.Focus();
         }
 
         public void showGames()
         {
-            MySQL.sql = "SELECT p.Title, g.Number, g.SecondTitle, g.CollectorsEdition, g.Genre, p.Publisher, g.Developers, pl.Platform FROM games AS g INNER JOIN publishers AS p ON g.Title_ID = p.ID INNER JOIN platform AS pl ON Platform_ID = pl.ID";
+            MySQL.sql = "SELECT g.ID, p.Title, g.Number, g.SecondTitle, g.CollectorsEdition, g.Genre, p.Publisher, g.Developers, pl.Platform FROM games AS g INNER JOIN publishers AS p ON g.Title_ID = p.ID INNER JOIN platform AS pl ON Platform_ID = pl.ID";
 
             MySQL.adapter = new MySqlDataAdapter(MySQL.sql, MySQL.con);
 
@@ -50,8 +52,7 @@ namespace Database_Libary
         {
             //Sorts the DataGrid in multiple columns
 
-            ICollectionView view =
-                    CollectionViewSource.GetDefaultView(dg.ItemsSource);
+            ICollectionView view = CollectionViewSource.GetDefaultView(dg.ItemsSource);
 
             view.SortDescriptions.Clear();
 
@@ -108,13 +109,28 @@ namespace Database_Libary
             try
             {
                 DataRowView dataRow = (DataRowView)dg.SelectedItems[0];
-                
+
+                int id = (int)dataRow["ID"];
                 string title = dataRow["Title"].ToString();
                 string number = dataRow["Number"].ToString();
                 string secondTitle = dataRow["SecondTitle"].ToString();
                 string platform = dataRow["Platform"].ToString();
 
-                removeWarning RemoveWarning = new removeWarning(title, number, secondTitle, platform);
+                MySQL.sqlID = "SELECT ID from games WHERE ID = '" + id + "'";
+                MySQL.cmd = new MySqlCommand(MySQL.sqlID, MySQL.con);
+                MySQL.con.Open();
+                MySQL.rdr = MySQL.cmd.ExecuteReader();
+
+                string test_string = "";
+
+                if (MySQL.rdr.Read())
+                {
+                    test_string = MySQL.rdr.GetString(0);
+                }
+
+                MySQL.con.Close();
+
+                removeWarning RemoveWarning = new removeWarning(id, title, number, secondTitle, platform);
 
                 RemoveWarning.Owner = this;
                 RemoveWarning.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -125,6 +141,31 @@ namespace Database_Libary
             catch (Exception)
             {
                 MessageBox.Show("Error!\nNo game selected", "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void listOfGames_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DependencyObject src = VisualTreeHelper.GetParent((DependencyObject)e.OriginalSource);
+
+            // Checks if the user double clicked on a row in the datagrid [ContentPresenter]
+            if (src.GetType() == typeof(ContentPresenter))
+            {
+                DataRowView dataRow = (DataRowView)listOfGames.SelectedItems[0];
+
+                //Gets the data from the datagrid columns and puts it into variables
+                int id = (int)dataRow["ID"];
+                string title = dataRow["Title"].ToString();
+                string number = dataRow["Number"].ToString();
+                string secondTitle = dataRow["SecondTitle"].ToString();
+                string collectorsEdition = dataRow["CollectorsEdition"].ToString();
+                string genre = dataRow["Genre"].ToString();
+                string publisher = dataRow["Publisher"].ToString();
+                string developer = dataRow["Developers"].ToString();
+                string platform = dataRow["Platform"].ToString();
+
+                MessageBox.Show("ID: " + id + "\nTitle: " + title + "\nNumber: " + number + "\nSecond Title: " + secondTitle + "\nCollector's Edition: " + collectorsEdition +
+                                "\nGenre(s): " + genre + "\nPublisher: " + publisher + "\nDeveloper(s): " + developer + "\nPlatform: " + platform);
             }
         }
     }

@@ -19,13 +19,12 @@ namespace Database_Libary
         public static MySqlDataAdapter adapter;
 
         public static string sql;
+        public static string sqlID;
         public static string nameOfGame;
 
         public static string result_string = "";
 
         bool result_bool = false;
-
-        public string textToBring { get; set; }
 
         public bool insertgames(int title_ID, string number, string secondTitle, string collectorsEdition, string genre, int publisher_ID, string developers, int platform_ID)
         {
@@ -36,7 +35,7 @@ namespace Database_Libary
                 sql = "SELECT * FROM games WHERE Number = '" + number + "' AND SecondTitle = '" + secondTitle + "' AND Platform_ID = '" + platform_ID + "'";
                 check = new MySqlCommand(sql, con);
                 con.Open();
-                rdr= check.ExecuteReader();
+                rdr = check.ExecuteReader();
 
                 if (!rdr.Read())
                 {
@@ -50,6 +49,8 @@ namespace Database_Libary
                     cmd.ExecuteNonQuery();
                     con.Close();
 
+                    resetAI();
+
                     MessageBox.Show("Successfully added " + result_string + " to the list!");
 
                     nameOfGame = "";
@@ -60,7 +61,7 @@ namespace Database_Libary
                     publisher_ID = 0;
                     developers = "";
                     platform_ID = 0;
-
+                    
                     result_bool = true;
                 }
                 else
@@ -110,6 +111,8 @@ namespace Database_Libary
 
                     MessageBox.Show("Successfully added " + title + " to the list!");
 
+                    resetAI();
+
                     result_bool = true;
                 }
                 else
@@ -133,14 +136,14 @@ namespace Database_Libary
             return result_bool;
         }
 
-        public bool removeGame(string number, string secondTitle, string platform)
+        public bool removeGame(int id)
         {
             result_bool = false;
-
+            
             try
             {
                 //This is the command
-                sql = "DELETE FROM games WHERE Number = '" + number + "' AND SecondTitle = '" + secondTitle + /*"' AND Platform_ID = '" + platform + */"'";
+                sql = "DELETE FROM games WHERE ID ='" + id + "'";
 
                 //This handles the connection and the query
                 cmd = new MySqlCommand(sql, con);
@@ -151,11 +154,13 @@ namespace Database_Libary
                 //Executes the query and saves the data to the database
                 cmd.ExecuteNonQuery();
 
-                MessageBox.Show("Successfully removed " + result_string + " from the list!");
-
                 //Closes the connection to the database
                 con.Close();
 
+                resetAI();
+
+                MessageBox.Show("Successfully removed " + result_string + " from the list!");
+                
                 result_bool = true;
             }
             catch (Exception ex)
@@ -206,6 +211,39 @@ namespace Database_Libary
             }
 
             return result_bool = true;
+        }
+
+        /// <summary>
+        /// Resets the Auto Increment ID of every table
+        /// </summary>
+        public void resetAI()
+        {
+            try
+            {
+                MySQL.con.Close();
+
+                string[] sql = { "developers", "games", "platform", "publishers" };
+
+                for (int i = 0; i < sql.Length; i++)
+                {
+                    MySQL.sql = "ALTER TABLE " + sql[i] + " auto_increment = 1; ";
+
+                    MySQL.cmd = new MySqlCommand(MySQL.sql, MySQL.con);
+
+                    MySQL.con.Open();
+                    MySQL.cmd.ExecuteNonQuery();
+                    MySQL.con.Close();
+                }
+            }
+            catch (Exception exc)
+            {
+                if (MySQL.con.State == ConnectionState.Open)
+                {
+                    MySQL.con.Close();
+                }
+
+                MessageBox.Show(exc.Message);
+            }
         }
     }
 }
