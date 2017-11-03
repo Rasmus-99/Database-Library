@@ -66,6 +66,7 @@
     <Compile Include="addTitleAndPublisher.xaml.cs">
       <DependentUpon>addTitleAndPublisher.xaml</DependentUpon>
     </Compile>
+    <Compile Include="customMethods.cs" />
     <Compile Include="removeWarning.xaml.cs">
       <DependentUpon>removeWarning.xaml</DependentUpon>
     </Compile>

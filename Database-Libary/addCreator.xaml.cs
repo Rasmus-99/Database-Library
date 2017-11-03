@@ -23,80 +23,35 @@ namespace Database_Libary
     public partial class addCreator : Window
     {
         MySQL mysql = new MySQL();
-        
+        customMethods methods = new customMethods();
+
         public static string developer = "";
 
         public addCreator(int id)
         {
             InitializeComponent();
 
-            fillList(listboxLeft, id);
+            mysql.fillList(listboxLeft, id, 0);
         }
 
         private void moveToRight_Click(object sender, RoutedEventArgs e)
         {
-            moveItem(listboxLeft, listboxRight);
+            methods.moveItem(listboxLeft, listboxRight);
         }
 
         private void moveToLeft_Click(object sender, RoutedEventArgs e)
         {
-            moveItem(listboxRight, listboxLeft);
+            methods.moveItem(listboxRight, listboxLeft);
         }
 
         private void moveAllToRight_Click(object sender, RoutedEventArgs e)
         {
-            moveItems(listboxLeft, listboxRight);
+            methods.moveItems(listboxLeft, listboxRight);
         }
 
         private void moveAllToLeft_Click(object sender, RoutedEventArgs e)
         {
-            moveItems(listboxRight, listboxLeft);
-        }
-
-        void fillList(ListBox lsbox, int id)
-        {
-            MySQL.sql = "SELECT Developer FROM developers WHERE Publisher_ID = '" + id + "'";
-            MySQL.cmd = new MySqlCommand(MySQL.sql, MySQL.con);
-            MySQL.con.Open();
-            MySQL.rdr = MySQL.cmd.ExecuteReader();
-
-            while (MySQL.rdr.Read())
-            {
-                string names = MySQL.rdr.GetString(0);
-                listboxLeft.Items.Add(names);
-            }
-
-            MySQL.con.Close();
-            lsbox.Items.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
-        }
-
-        void moveItem(ListBox lstFrom, ListBox lstTo)
-        {
-            try
-            {
-                while (lstFrom.SelectedItems.Count > 0)
-                {
-                    string item = (string)lstFrom.SelectedItems[0];
-                    lstTo.Items.Add(item);
-                    lstFrom.Items.Remove(item);
-                }
-
-                lstTo.Items.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show(exc.Message);
-            }
-        }
-
-        void moveItems(ListBox lsFrom, ListBox lsTo)
-        {
-            for (int i = 0; i < lsFrom.Items.Count; i++)
-            {
-                lsTo.Items.Add(lsFrom.Items[i]);
-            }
-
-            lsFrom.Items.Clear();
+            methods.moveItems(listboxRight, listboxLeft);
         }
 
         private void save_Click(object sender, RoutedEventArgs e)

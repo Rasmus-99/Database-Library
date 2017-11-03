@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System.Windows;
+using System.Windows.Controls;
+using System.ComponentModel;
 
 namespace Database_Libary
 {
@@ -24,7 +26,7 @@ namespace Database_Libary
 
         public static string result_string = "";
 
-        bool result_bool = false;
+        public static bool result_bool = false;
 
         public bool insertgames(int title_ID, string number, string secondTitle, string collectorsEdition, string genre, int publisher_ID, string developers, int platform_ID)
         {
@@ -191,26 +193,24 @@ namespace Database_Libary
             return result_bool;
         }
 
-        public bool checkString(string number, string secondTitle)
+        /// <summary>
+        /// Fills the ListBox with data from the desired database table
+        /// </summary>
+        public void fillList(ListBox lsbox, int id, int getID)
         {
-            if (number == "" && secondTitle == "")
+            sql = "SELECT Developer FROM developers WHERE Publisher_ID = '" + id + "'";
+            cmd = new MySqlCommand(sql, con);
+            con.Open();
+            rdr = cmd.ExecuteReader();
+
+            while (rdr.Read())
             {
-                result_string = nameOfGame;
-            }
-            else if (number != "" && secondTitle == "")
-            {
-                result_string = nameOfGame + " " + number;
-            }
-            else if (number == "" && secondTitle != "")
-            {
-                result_string = nameOfGame + " - " + secondTitle;
-            }
-            else if (number != "" && secondTitle != "")
-            {
-                result_string = nameOfGame + " " + number + " - " + secondTitle;
+                string names = rdr.GetString(getID);
+                lsbox.Items.Add(names);
             }
 
-            return result_bool = true;
+            con.Close();
+            lsbox.Items.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
         }
 
         /// <summary>

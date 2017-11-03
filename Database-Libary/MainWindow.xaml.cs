@@ -24,19 +24,20 @@ namespace Database_Libary
     public partial class MainWindow : Window
     {
         MySQL mysql = new MySQL();
+        customMethods methods = new customMethods();
         
         public MainWindow()
         {
             InitializeComponent();
 
-            showGames();
+            showGames(listOfGames);
 
-            sortList(listOfGames);
+            methods.sortList(listOfGames, "Title", "Number", "Platform");
 
             listOfGames.Focus();
         }
 
-        public void showGames()
+        public void showGames(DataGrid dg)
         {
             MySQL.sql = "SELECT g.ID, p.Title, g.Number, g.SecondTitle, g.CollectorsEdition, g.Genre, p.Publisher, g.Developers, pl.Platform FROM games AS g INNER JOIN publishers AS p ON g.Title_ID = p.ID INNER JOIN platform AS pl ON Platform_ID = pl.ID";
 
@@ -45,25 +46,7 @@ namespace Database_Libary
             DataSet ds = new DataSet();
             MySQL.adapter.Fill(ds);
 
-            listOfGames.ItemsSource = ds.Tables[0].DefaultView;
-        }
-
-        void sortList(DataGrid dg)
-        {
-            //Sorts the DataGrid in multiple columns
-
-            ICollectionView view = CollectionViewSource.GetDefaultView(dg.ItemsSource);
-
-            view.SortDescriptions.Clear();
-
-            SortDescription sd = new SortDescription("Title", ListSortDirection.Ascending);
-            view.SortDescriptions.Add(sd);
-
-            sd = new SortDescription("Number", ListSortDirection.Ascending);
-            view.SortDescriptions.Add(sd);
-
-            sd = new SortDescription("Platform", ListSortDirection.Ascending);
-            view.SortDescriptions.Add(sd);
+            dg.ItemsSource = ds.Tables[0].DefaultView;
         }
 
         private void add_Click(object sender, RoutedEventArgs e)
@@ -76,7 +59,7 @@ namespace Database_Libary
             Add.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             Add.ShowDialog();
 
-            sortList(listOfGames);
+            methods.sortList(listOfGames, "Title", "Number", "Platform");
         }
 
         private void remove_Click(object sender, RoutedEventArgs e)
@@ -88,7 +71,7 @@ namespace Database_Libary
         {
             listOfGames.ItemsSource = null;
             listOfGames.Items.Clear();
-            showGames();
+            showGames(listOfGames);
         }
 
         private void listOfGames_KeyUp(object sender, KeyEventArgs e)
@@ -101,7 +84,7 @@ namespace Database_Libary
             }
 
             e.Handled = true;
-            sortList(listOfGames);
+            methods.sortList(listOfGames, "Title", "Number", "Platform");
         }
 
         void removeGame(DataGrid dg)

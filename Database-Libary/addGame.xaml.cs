@@ -23,6 +23,7 @@ namespace Database_Libary
     public partial class addGame : Window
     {
         MySQL mysql = new MySQL();
+        customMethods methods = new customMethods();
 
         public event Action updateListAdd;
         
@@ -42,9 +43,11 @@ namespace Database_Libary
             genreListbox.Items.Add("            Genres");
             genreListbox.Items.Add("------------------------");
 
-            fillCombo("SELECT * FROM publishers", title, 1);
-            fillCombo("SELECT * FROM publishers", publisher, 2);
-            fillCombo("SELECT * FROM platform", platform, 1);
+            methods.fillCombo(title, "Select a title", "SELECT * FROM publishers", 1);
+            methods.fillCombo(publisher, "Select a publisher", "SELECT * FROM publishers", 2);
+            methods.fillCombo(platform, "Select a platform", "SELECT * FROM platform", 1);
+
+            publisher.SelectionChanged += publisher_SelectionChanged;
         }
 
         private void AddGame_Click(object sender, RoutedEventArgs e)
@@ -87,7 +90,7 @@ namespace Database_Libary
                 
                 MySQL.nameOfGame = title.Text;
 
-                if (mysql.checkString(number.Text, secondTitle.Text))
+                if (methods.checkString(number.Text, secondTitle.Text))
                 {
                     if (mysql.insertgames(title.SelectedIndex, number.Text, secondTitle.Text, CollectorsEdition_string, genres, publisher.SelectedIndex, addCreator.developer, platform.SelectedIndex))
                     {
@@ -161,57 +164,6 @@ namespace Database_Libary
 
                 genre.Text = "";
                 genre.Focus();
-            }
-        }
-
-        void fillCombo(string querry, ComboBox c, int getString)
-        {
-            c.Items.Clear();
-            c.SelectedIndex = 0;
-
-            if (c == title)
-            {
-                c.Items.Add("Select a title");
-            }
-            else if (c == publisher)
-            {
-                c.Items.Add("Select a publisher");
-            }
-            else if (c == platform)
-            {
-                c.Items.Add("Select a platform");
-            }
-
-            MySQL.con.Close();
-
-            try
-            {
-                MySQL.con.Open();
-
-                MySQL.cmd = new MySqlCommand(querry, MySQL.con);
-                MySQL.rdr = MySQL.cmd.ExecuteReader();
-
-                while (MySQL.rdr.Read())
-                {
-                    string name = MySQL.rdr.GetString(getString);
-                    c.Items.Add(name);
-                }
-
-                MySQL.con.Close();
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show(exc.Message);
-
-                if (MySQL.con.State == ConnectionState.Open)
-                {
-                    MySQL.con.Close();
-                }
-            }
-
-            if (c == publisher)
-            {
-                c.SelectionChanged += publisher_SelectionChanged;
             }
         }
 

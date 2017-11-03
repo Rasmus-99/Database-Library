@@ -21,12 +21,14 @@ namespace Database_Libary
     /// </summary>
     public partial class addDeveloper : Window
     {
+        customMethods methods = new customMethods();
+
         public addDeveloper()
         {
             InitializeComponent();
             textAdd.Clear();
 
-            fillCombo("SELECT * FROM publishers", dropdown);
+            methods.fillCombo(dropdown, "Select a publisher", "SELECT * FROM publishers", 2);
         }
 
         private void AddDeveloper_Click(object sender, RoutedEventArgs e)
@@ -60,40 +62,6 @@ namespace Database_Libary
                     textAdd.Focus();
                     MessageBox.Show("Developer already exists");
                 }
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show(exc.Message);
-
-                if (MySQL.con.State == ConnectionState.Open)
-                {
-                    MySQL.con.Close();
-                }
-            }
-        }
-
-        void fillCombo(string querry, ComboBox c)
-        {
-            c.Items.Clear();
-            c.SelectedIndex = 0;
-            c.Items.Add("Select a publisher");
-
-            MySQL.con.Close();
-
-            try
-            {
-                MySQL.con.Open();
-
-                MySQL.cmd = new MySqlCommand(querry, MySQL.con);
-                MySQL.rdr = MySQL.cmd.ExecuteReader();
-
-                while (MySQL.rdr.Read())
-                {
-                    string name = MySQL.rdr.GetString(2);
-                    c.Items.Add(name);
-                }
-
-                MySQL.con.Close();
             }
             catch (Exception exc)
             {

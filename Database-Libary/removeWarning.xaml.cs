@@ -20,6 +20,7 @@ namespace Database_Libary
     public partial class removeWarning : Window
     {
         MySQL mysql = new MySQL();
+        customMethods methods = new customMethods();
 
         int id = 0;
         string text = "";
@@ -67,7 +68,7 @@ namespace Database_Libary
 
         private void removeGame_Click(object sender, RoutedEventArgs e)
         {
-            if (mysql.checkString(number, secondTitle))
+            if (methods.checkString(number, secondTitle))
             {
                 MySQL.result_string = text;
 
