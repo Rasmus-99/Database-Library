@@ -13,8 +13,8 @@ namespace Database_Libary
 {
     public class MySQL
     {
-        //public static MySqlConnection con = new MySqlConnection("host=localhost;user=root;database=library;");
-        public static MySqlConnection con = new MySqlConnection("host=10.11.4.150;user=rasmus;password=ubuntu;database=Rasmus_library;");
+        public static MySqlConnection con = new MySqlConnection("host=localhost;user=root;database=library;");
+        //public static MySqlConnection con = new MySqlConnection("host=10.11.4.150;user=rasmus;password=ubuntu;database=Rasmus_library;");
         public static MySqlCommand check;
         public static MySqlCommand cmd;
         public static MySqlDataReader rdr;

@@ -36,7 +36,7 @@ namespace Database_Libary
         /// <summary>
         /// Fills a combobox with data from the selected table
         /// </summary>
-        public void fillCombo(ComboBox c, string startText, string sql, int getID)
+        public void fillCombo(ComboBox c, string startText, string sql, int columnNumber)
         {
             c.Items.Clear();
             c.SelectedIndex = 0;
@@ -54,7 +54,7 @@ namespace Database_Libary
 
                 while (MySQL.rdr.Read())
                 {
-                    string name = MySQL.rdr.GetString(getID);
+                    string name = MySQL.rdr.GetString(columnNumber);
                     c.Items.Add(name);
                 }
 
