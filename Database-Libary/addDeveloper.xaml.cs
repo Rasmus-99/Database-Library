@@ -21,7 +21,12 @@ namespace Database_Libary
     /// </summary>
     public partial class addDeveloper : Window
     {
+        MySQL mysql = new MySQL();
         customMethods methods = new customMethods();
+
+        int i = 0;
+
+        string[] removeLastDeveloper = new string[100];
 
         public addDeveloper()
         {
@@ -31,46 +36,45 @@ namespace Database_Libary
             methods.fillCombo(dropdown, "Select a publisher", "SELECT * FROM publishers", 2);
         }
 
-        private void AddDeveloper_Click(object sender, RoutedEventArgs e)
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            try
+            lsBox.Items.Add(textAdd.Text);
+
+            removeLastDeveloper[i] = textAdd.Text;
+            i++;
+
+            textAdd.Text = "";
+            textAdd.Focus();
+        }
+
+        private void btnAddList_Click(object sender, RoutedEventArgs e)
+        {
+            if (textAdd.Text != "")
             {
-                MySQL.sql = "SELECT * FROM developers WHERE Developer = '" + textAdd.Text + "'";
-                MySQL.check = new MySqlCommand(MySQL.sql, MySQL.con);
-                MySQL.con.Open();
-                MySQL.rdr = MySQL.check.ExecuteReader();
-
-                if (!MySQL.rdr.Read())
-                {
-                    MySQL.con.Close();
-
-                    MySQL.sql = "INSERT INTO developers (Publisher_ID, Developer) VALUES('" + dropdown.SelectedIndex + "','" + textAdd.Text + "')";
-                    MySQL.cmd = new MySqlCommand(MySQL.sql, MySQL.con);
-
-                    MySQL.con.Open();
-                    MySQL.cmd.ExecuteNonQuery();
-                    MySQL.con.Close();
-
-                    MessageBox.Show("Successfully added " + textAdd.Text + " to the list!");
-
-                    this.Close();
-                }
-                else
-                {
-                    MySQL.con.Close();
-                    textAdd.Clear();
-                    textAdd.Focus();
-                    MessageBox.Show("Developer already exists");
-                }
+                lsBox.Items.Add(textAdd.Text);
+                textAdd.Text = "";
             }
-            catch (Exception exc)
-            {
-                MessageBox.Show(exc.Message);
 
-                if (MySQL.con.State == ConnectionState.Open)
-                {
-                    MySQL.con.Close();
-                }
+            if (dropdown.SelectedIndex != 0)
+            {
+                mysql.insertDeveloper(lsBox, textAdd, dropdown);
+            }
+            else
+            {
+                MessageBox.Show("Not all fields are filled in");
+            }
+        }
+
+        private void btnRemoveList_Click(object sender, RoutedEventArgs e)
+        {
+            if (lsBox.Items.Count > 0)
+            {
+                i--;
+                lsBox.Items.Remove(removeLastDeveloper[i]);
+            }
+            else
+            {
+                MessageBox.Show("Error 404 \nDeveloper not found", "Error 404", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

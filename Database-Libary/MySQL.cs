@@ -13,8 +13,8 @@ namespace Database_Libary
 {
     public class MySQL
     {
-        public static MySqlConnection con = new MySqlConnection("host=localhost;user=root;database=library;");
-        //public static MySqlConnection con = new MySqlConnection("host=10.11.4.150;user=rasmus;password=ubuntu;database=Rasmus_library;");
+        //public static MySqlConnection con = new MySqlConnection("host=localhost;user=root;database=library;");
+        public static MySqlConnection con = new MySqlConnection("host=10.11.4.150;user=rasmus;password=ubuntu;database=Rasmus_library;");
         public static MySqlCommand check;
         public static MySqlCommand cmd;
         public static MySqlDataReader rdr;
@@ -76,12 +76,12 @@ namespace Database_Libary
             }
             catch (Exception exc)
             {
-                MessageBox.Show(exc.Message);
-
                 if (con.State == ConnectionState.Open)
                 {
                     con.Close();
                 }
+
+                MessageBox.Show(exc.Message);
             }
 
             return result_bool;
@@ -133,6 +133,46 @@ namespace Database_Libary
                 {
                     con.Close();
                 }
+            }
+
+            return result_bool;
+        }
+
+        public bool insertDeveloper(ListBox lsBox, TextBox txtBox, ComboBox dropdown)
+        {
+            result_bool = false;
+
+            for (int i = 0; i < lsBox.Items.Count; i++)
+            {
+                try
+                {
+                    MySQL.con.Close();
+                    
+                    MySQL.sql = "INSERT INTO developers (Publisher_ID, Developer) VALUES('" + dropdown.SelectedIndex + "','" + lsBox.Items[i].ToString() + "')";
+
+                    MySQL.cmd = new MySql.Data.MySqlClient.MySqlCommand(MySQL.sql, MySQL.con);
+
+                    MySQL.con.Open();
+                    MySQL.cmd.ExecuteNonQuery();
+                    MySQL.con.Close();
+
+                    result_bool = true;
+                }
+                catch (Exception exc)
+                {
+                    if (MySQL.con.State == ConnectionState.Open)
+                    {
+                        MySQL.con.Close();
+                    }
+
+                    result_bool = false;
+                    MessageBox.Show(exc.Message);
+                }
+            }
+
+            if (result_bool == true)
+            {
+                MessageBox.Show("Successfully added developers to the list!");
             }
 
             return result_bool;
@@ -218,32 +258,20 @@ namespace Database_Libary
         /// </summary>
         public void resetAI()
         {
-            try
+            con.Close();
+
+            string[] text = { "developers", "games", "platform", "publishers" };
+
+            for (int i = 0; i < text.Length; i++)
             {
-                MySQL.con.Close();
+                sql = "ALTER TABLE " + text[i] + " auto_increment = 1; ";
 
-                string[] sql = { "developers", "games", "platform", "publishers" };
+                cmd = new MySqlCommand(sql, con);
 
-                for (int i = 0; i < sql.Length; i++)
-                {
-                    MySQL.sql = "ALTER TABLE " + sql[i] + " auto_increment = 1; ";
-
-                    MySQL.cmd = new MySqlCommand(MySQL.sql, MySQL.con);
-
-                    MySQL.con.Open();
-                    MySQL.cmd.ExecuteNonQuery();
-                    MySQL.con.Close();
-                }
-            }
-            catch (Exception exc)
-            {
-                if (MySQL.con.State == ConnectionState.Open)
-                {
-                    MySQL.con.Close();
-                }
-
-                MessageBox.Show(exc.Message);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
             }
         }
-    }
+     }
 }

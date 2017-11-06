@@ -12,7 +12,6 @@
         >
 
     <Grid>
-
         <Label
             Content="Are you sure you want to remove"
             Margin="10,10,0,0"
@@ -70,6 +69,5 @@
             Click="cancel_Click"
             TabIndex="2"
 		    />
-
     </Grid>
 </Window>

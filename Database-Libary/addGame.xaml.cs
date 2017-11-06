@@ -212,5 +212,14 @@ namespace Database_Libary
         {
             mysql.resetAI();
         }
+
+        private void addPlatform_Click(object sender, RoutedEventArgs e)
+        {
+            addPlatform Add = new addPlatform();
+
+            Add.Owner = this;
+            Add.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            Add.ShowDialog();
+        }
     }
 }

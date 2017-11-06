@@ -63,12 +63,18 @@
     <Compile Include="addDeveloper.xaml.cs">
       <DependentUpon>addDeveloper.xaml</DependentUpon>
     </Compile>
+    <Compile Include="addPlatform.xaml.cs">
+      <DependentUpon>addPlatform.xaml</DependentUpon>
+    </Compile>
     <Compile Include="addTitleAndPublisher.xaml.cs">
       <DependentUpon>addTitleAndPublisher.xaml</DependentUpon>
     </Compile>
     <Compile Include="customMethods.cs" />
     <Compile Include="removeWarning.xaml.cs">
       <DependentUpon>removeWarning.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="viewContent.xaml.cs">
+      <DependentUpon>viewContent.xaml</DependentUpon>
     </Compile>
     <Page Include="addCreator.xaml">
       <SubType>Designer</SubType>
@@ -79,6 +85,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="addGame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="addPlatform.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -102,6 +112,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="removeWarning.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="viewContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

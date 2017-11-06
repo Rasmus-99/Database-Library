@@ -147,8 +147,11 @@ namespace Database_Libary
                 string developer = dataRow["Developers"].ToString();
                 string platform = dataRow["Platform"].ToString();
 
-                MessageBox.Show("ID: " + id + "\nTitle: " + title + "\nNumber: " + number + "\nSecond Title: " + secondTitle + "\nCollector's Edition: " + collectorsEdition +
-                                "\nGenre(s): " + genre + "\nPublisher: " + publisher + "\nDeveloper(s): " + developer + "\nPlatform: " + platform);
+                viewContent view = new viewContent(id, title, number, secondTitle, collectorsEdition,genre, publisher, developer, platform);
+
+                view.Owner = this;
+                view.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                view.Show();
             }
         }
     }

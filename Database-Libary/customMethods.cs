@@ -83,9 +83,9 @@ namespace Database_Libary
                     string item = (string)lstFrom.SelectedItems[0];
                     lstTo.Items.Add(item);
                     lstFrom.Items.Remove(item);
-                }
 
-                lstTo.Items.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
+                    lstTo.Items.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
+                }
             }
             catch (Exception exc)
             {
@@ -101,6 +101,8 @@ namespace Database_Libary
             for (int i = 0; i < lsFrom.Items.Count; i++)
             {
                 lsTo.Items.Add(lsFrom.Items[i]);
+
+                lsTo.Items.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
             }
 
             lsFrom.Items.Clear();

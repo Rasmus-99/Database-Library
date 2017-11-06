@@ -12,7 +12,6 @@
         >
 
     <Grid>
-
         <DataGrid
             x:Name="listOfGames"
             Margin="0,35,0,0"
@@ -20,7 +19,7 @@
             HorizontalAlignment="Stretch"
             IsReadOnly="True"
             KeyUp="listOfGames_KeyUp"
-            TabIndex="0"
+            TabIndex="1"
             MouseDoubleClick="listOfGames_MouseDoubleClick"
             />
 
@@ -32,7 +31,7 @@
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
             Click="add_Click"
-            TabIndex="1"
+            TabIndex="2"
             />
 
         <Button
@@ -43,7 +42,7 @@
             VerticalAlignment="Top"
             HorizontalAlignment="Right"
             Click="remove_Click"
-            TabIndex="2"
+            TabIndex="3"
             />
     </Grid>
 </Window>
