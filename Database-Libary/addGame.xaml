@@ -183,9 +183,9 @@
             x:Name="clear"
             Content="Clear"
             Width="130"
-            Margin="10,0,0,20"
+            Margin="0,0,10,20"
             VerticalAlignment="Bottom"
-            HorizontalAlignment="Left"
+            HorizontalAlignment="Right"
             Click="clear_Click"
             TabIndex="11"
             />
@@ -194,9 +194,9 @@
             x:Name="AddGame"
             Content="Add Game"
             Width="130"
-            Margin="0,0,10,20"
+            Margin="10,0,0,20"
             VerticalAlignment="Bottom"
-            HorizontalAlignment="Right"
+            HorizontalAlignment="Left"
             Click="AddGame_Click"
             TabIndex="10"
             />

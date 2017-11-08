@@ -7,11 +7,31 @@
         mc:Ignorable="d"
         Title="view Content"
         Width="400"
-        Height="475"
+        Height="500"
         ResizeMode="CanMinimize"
         >
 
     <Grid>
+
+        <Button
+            x:Name="btn_edit"
+            Content="Edit"
+            Width="100"
+            Margin="10,0,0,10"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Left"
+            Click="btn_edit_Click"
+            />
+
+        <Button
+            x:Name="btn_cancel"
+            Content="Cancel"
+            Width="100"
+            Margin="0,0,10,10"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Right" Click="btn_cancel_Click"
+            />
+
         <!-- ID -->
         <Label
             Content="ID:"
@@ -27,6 +47,17 @@
         <TextBox
             x:Name="ID_txt"
             Text="ID"
+            Margin="120,10,0,0"
+            Width="255"
+            Height="35"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            HorizontalAlignment="Left"
+            Padding="2"
+            />
+
+        <Label
+            x:Name="ID_label"
             Margin="120,10,0,0"
             Width="255"
             Height="35"
@@ -61,6 +92,17 @@
             Padding="2"
             />
 
+        <Label
+            x:Name="title_label"
+            Margin="120,55,0,0"
+            Width="255"
+            Height="35"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            HorizontalAlignment="Left"
+            Padding="2"
+            />
+
         <!-- Number -->
         <Label
             Content="Number:"
@@ -77,6 +119,17 @@
         <TextBox
             x:Name="number_txt"
             Text="Number"
+            Margin="120,100,0,0"
+            Width="255"
+            Height="35"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            HorizontalAlignment="Left"
+            Padding="2"
+            />
+
+        <Label
+            x:Name="number_label"
             Margin="120,100,0,0"
             Width="255"
             Height="35"
@@ -111,6 +164,17 @@
             Padding="2"
             />
 
+        <Label
+            x:Name="secondTitle_label"
+            Margin="120,145,0,0"
+            Width="255"
+            Height="35"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            HorizontalAlignment="Left"
+            Padding="2"
+            />
+
         <!-- Collector's Edition -->
         <Label
             Content="Collector's Edition:"
@@ -127,6 +191,17 @@
         <TextBox
             x:Name="collectorsEdition_txt"
             Text="Collector's Edition"
+            Margin="120,190,0,0"
+            Width="255"
+            Height="35"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            HorizontalAlignment="Left"
+            Padding="2"
+            />
+
+        <Label
+            x:Name="collectorsEdition_label"
             Margin="120,190,0,0"
             Width="255"
             Height="35"
@@ -161,6 +236,17 @@
             Padding="2"
             />
 
+        <Label
+            x:Name="genres_label"
+            Margin="120,235,0,0"
+            Width="255"
+            Height="35"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            HorizontalAlignment="Left"
+            Padding="2"
+            />
+
         <!-- Publisher -->
         <Label
             Content="Publisher:"
@@ -177,6 +263,17 @@
         <TextBox
             x:Name="publisher_txt"
             Text="Publisher"
+            Margin="120,280,0,0"
+            Width="255"
+            Height="35"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            HorizontalAlignment="Left"
+            Padding="2"
+            />
+
+        <Label
+            x:Name="publisher_label"
             Margin="120,280,0,0"
             Width="255"
             Height="35"
@@ -212,6 +309,17 @@
             HorizontalScrollBarVisibility="Auto"
             />
 
+        <Label
+            x:Name="developers_label"
+            Margin="120,325,0,0"
+            Width="255"
+            Height="50"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            HorizontalAlignment="Left"
+            Padding="2"
+            />
+
         <!-- Platform -->
         <Label
             Content="Platform:"
@@ -228,6 +336,17 @@
         <TextBox
             x:Name="platform_txt"
             Text="Platform"
+            Margin="120,385,0,0"
+            Width="255"
+            Height="35"
+            VerticalAlignment="Top"
+            VerticalContentAlignment="Center"
+            HorizontalAlignment="Left"
+            Padding="2"
+            />
+
+        <Label
+            x:Name="platform_label"
             Margin="120,385,0,0"
             Width="255"
             Height="35"
